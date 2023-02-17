@@ -13,6 +13,7 @@ namespace Code.Architecture
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(RegisterServicesState)] = new RegisterServicesState(this, sceneLoader, services),
+                [typeof(LoadProgressState)] = new LoadProgressState(this),
             };
         }
 

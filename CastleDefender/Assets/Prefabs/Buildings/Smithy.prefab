@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickHandlingType: 4
+  BuildingType: 4
 --- !u!114 &9038563407324661193
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,6 @@ namespace Code.GameServices.InputService
         private ClickHandling _newClickHandling;
         private ClickHandling _oldClickHandling;
 
-        private void Start()
-        {
-            //Fix if Factory
-            _oldClickHandling = GameObject.FindGameObjectWithTag("Store").GetComponent<ClickHandling>();
-        }
-
         private void Update()
         {
             if(Input.GetMouseButtonDown(0))
@@ -29,20 +23,23 @@ namespace Code.GameServices.InputService
                     
                         if (_newClickHandling.ClickHandlingType == ClickHandlingType.Unit)
                         {
-                            Debug.Log("click unit");
+                            _newClickHandling.OnClick();
+                        }
+                        else if (_newClickHandling.ClickHandlingType == ClickHandlingType.Building && _oldClickHandling == null)
+                        {
                             _newClickHandling.OnClick();
                         }
                         else if (_newClickHandling.ClickHandlingType == ClickHandlingType.Building && _oldClickHandling.ClickHandlingType == ClickHandlingType.Building)
                         {
-                            Debug.Log("click building");
                             _newClickHandling.OnClick();
                         }
                         else if (_newClickHandling.ClickHandlingType == ClickHandlingType.Building && _oldClickHandling.ClickHandlingType == ClickHandlingType.Unit)
                         {
-                            Debug.Log("click move unit");
                             _oldClickHandling.MoveUnit(_newClickHandling);
+                            _oldClickHandling = null;
+                            return;
                         }
-                    
+                        
                         _oldClickHandling = _newClickHandling;
                     }
                 }

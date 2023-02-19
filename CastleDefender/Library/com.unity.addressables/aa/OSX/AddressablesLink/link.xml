@@ -20,6 +20,7 @@
   </assembly>
   <assembly fullname="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Rigidbody" preserve="all" />
+    <type fullname="UnityEngine.BoxCollider" preserve="all" />
     <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
   </assembly>
   <assembly fullname="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -29,7 +30,9 @@
     <type fullname="Code.GameServices.InputService.ClickHandling" preserve="all" />
     <type fullname="Code.Unit.MoveUnit" preserve="all" />
     <type fullname="Code.Unit.CraftUnit.CraftResourcesUnit" preserve="all" />
+    <type fullname="Code.Buildings.CastleBuildings.StoreBuilding" preserve="all" />
     <type fullname="Code.Unit.OnTriggerHandlingUnit" preserve="all" />
+    <type fullname="Code.GameServices.SaveLoadProgress.ResourcesProgress" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.AI.NavMeshAgent" preserve="all" />

@@ -5,17 +5,16 @@ namespace Code.GameServices
 {
     public class StaticDataService : IStaticDataService
     {
-        private BuildingsStaticData _buildingsData;
+        private BuildingPointsStaticData _buildingPointsData;
         
         public void LoadBuildings()
         {
-            _buildingsData = Resources.Load<BuildingsStaticData>("StaticData/Buildings");
-            Debug.Log($"{_buildingsData.IronCraftPoint}");
+            _buildingPointsData = Resources.Load<BuildingPointsStaticData>("StaticData/Buildings");
         }
 
-        public BuildingsStaticData GetBuildingsData()
+        public BuildingPointsStaticData GetBuildingsData()
         {
-            return _buildingsData;
+            return _buildingPointsData;
         }
     }
 }

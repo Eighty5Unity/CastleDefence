@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Code.StaticData
 {
     [CreateAssetMenu(menuName = "StaticData/Buildings", fileName = "Buildings")]
-    public class BuildingsStaticData : ScriptableObject
+    public class BuildingPointsStaticData : ScriptableObject
     {
         public Vector3 CastleSpawnPoinUnit;
         public Vector3 StorePoint;

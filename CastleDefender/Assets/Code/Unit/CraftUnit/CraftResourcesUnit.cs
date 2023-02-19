@@ -1,5 +1,4 @@
 using System.Collections;
-using Code.Architecture;
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
 using UnityEngine;
@@ -17,17 +16,18 @@ namespace Code.Unit.CraftUnit
         private bool _onStore;
         private bool _movingToStore;
         private Vector3 _craftingPosition;
-        private bool _moveToStore;
 
-        private void Start()
+        public void Constructor(OnTriggerHandlingUnit triggerHandling, MoveUnit move)
         {
-            _moveUnit = GetComponent<MoveUnit>();
+            _moveUnit = move;
             
-            _triggerHandling = GetComponent<OnTriggerHandlingUnit>();
+            _triggerHandling = triggerHandling;
             _triggerHandling.CraftResoucesEnter += EnterResources;
             _triggerHandling.CraftResoucesExit += ExitResources;
             _triggerHandling.StoreBuildingEnter += EnterStore;
             _triggerHandling.StoreBuildingExit += ExitStore;
+
+            ResourcesType = ResourcesType.Unknow;
         }
 
         private void EnterResources(CraftResourcesBuilding resources)
@@ -50,20 +50,26 @@ namespace Code.Unit.CraftUnit
         private void ExitResources(CraftResourcesBuilding resources)
         {
             _isCrafting = false;
-            StopCoroutine(Craft());
+            if (!_movingToStore)
+            {
+                StopCoroutine(Craft());
+            }
         }
 
         private void EnterStore(StoreBuilding store)
         {
-            if (_onStore && !_movingToStore)
+            if (_onStore)
             {
                 return;
             }
 
-            _onStore = true;
-            store.UpdateResouces(this);
-            ResourcesCount = 0f;
-            _moveUnit.Move(_craftingPosition);
+            if (_movingToStore)
+            {
+                _onStore = true;
+                store.UpdateResouces(ResourcesType, ResourcesCount);
+                ResourcesCount = 0f;
+                _moveUnit.Move(_craftingPosition);
+            }
         }
 
         private void ExitStore(StoreBuilding store)
@@ -78,7 +84,7 @@ namespace Code.Unit.CraftUnit
             
             ResourcesCount = 10f;
             _craftingPosition = transform.position;
-            _moveToStore = true;
+            _movingToStore = true;
             _moveUnit.MoveToStore();
         }
     }

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac05fda44924f75b2d560189f3ff3da, type: 3}
   m_Name: Buildings
   m_EditorClassIdentifier: 
-  StoreBuilding: {fileID: 0}
-  FoodBuilding: {fileID: 0}
-  WoodBuilding: {fileID: 0}
-  StoneBuilding: {fileID: 0}
-  IronBuilding: {fileID: 0}
-  CastleBuilding: {fileID: 0}
+  CastleSpawnPoinUnit: {x: 5, y: 0, z: -10}
+  StorePoint: {x: 7.33, y: 0.5, z: 2.61}
+  FoodType: 2
+  FoodCraftPoint: {x: 7, y: 1, z: 18.91}
+  WoodType: 4
+  WoodCraftPoint: {x: 17.5, y: 3, z: 16.76}
+  StoneType: 6
+  StoneCraftPoint: {x: 25.23, y: 0.5, z: 0}
+  IronType: 8
+  IronCraftPoint: {x: 25.13, y: 0.5, z: -10.34}

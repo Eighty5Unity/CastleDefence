@@ -15,29 +15,24 @@ namespace Code.Unit
         
         private Transform _buildingPoint;
         private ClickHandling _clickHandling;
-
         private Vector3 _craftFoodPoint;
         private Vector3 _craftWoodPoint;
         private Vector3 _craftStonePoint;
         private Vector3 _craftIronPoint;
         private Vector3 _storePoint;
 
-        public void Counstructor(IStaticDataService staticData)
+        public void Counstructor(IStaticDataService staticData, ClickHandling clickHandling)
         {
-            BuildingsStaticData points = staticData.GetBuildingsData();
+            BuildingPointsStaticData points = staticData.GetBuildingsData();
             _craftFoodPoint = points.FoodCraftPoint;
             _craftWoodPoint = points.WoodCraftPoint;
             _craftStonePoint = points.StoneCraftPoint;
             _craftIronPoint = points.IronCraftPoint;
             _storePoint = points.StorePoint;
 
-        }
-
-
-        private void Start()
-        {
-            _clickHandling = GetComponent<ClickHandling>();
+            _clickHandling = clickHandling;
             _clickHandling.MoveHappend += ChooseBuildingToMove;
+
         }
 
         public void ChooseBuildingToMove(ClickHandling building)
@@ -83,28 +78,24 @@ namespace Code.Unit
         {
             CraftResourcesType = ResourcesType.Iron;
             Move(_craftIronPoint);
-            Debug.Log($"MoveToIron {_craftIronPoint}");
         }
 
         private void MoveToCraftStone()
         {
             CraftResourcesType = ResourcesType.Stone;
             Move(_craftStonePoint);
-            Debug.Log("MoveToStone");
         }
 
         private void MoveToCraftWood()
         {
             CraftResourcesType = ResourcesType.Wood;
             Move(_craftWoodPoint);
-            Debug.Log("MoveToWood");
         }
 
         private void MoveToCraftFood()
         {
             CraftResourcesType = ResourcesType.Food;
             Move(_craftFoodPoint);
-            Debug.Log("MoveToFood");
         }
 
         private void MoveToWall(ClickHandling building)
@@ -120,7 +111,6 @@ namespace Code.Unit
         public void MoveToStore()
         {
             Move(_storePoint);
-            Debug.Log("MoveToStore");
         }
 
         private void MoveToBarracks()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.GameServices;
+using Code.GameServices.SaveLoadProgress;
 
 namespace Code.Architecture.States
 {
@@ -14,8 +15,8 @@ namespace Code.Architecture.States
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(RegisterServicesState)] = new RegisterServicesState(this, sceneLoader, services),
-                [typeof(LoadProgressState)] = new LoadProgressState(this),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, services.GetService<IStaticDataService>(), services.GetService<IGameFactory>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, services.GetService<IProgressService>(), services.GetService<ISaveLoadService>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, services.GetService<IStaticDataService>(), services.GetService<IGameFactory>(), services.GetService<IProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(),
             };
         }

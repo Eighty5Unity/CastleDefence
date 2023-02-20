@@ -31,6 +31,7 @@ namespace Code.Architecture.States
         private async void OnLoaded()
         {
             await InitGameWorld();
+            await InitUI();
             InformProgressLoaders();
             _statesMachine.EnterState<GameLoopState>();
         }
@@ -47,6 +48,12 @@ namespace Code.Architecture.States
         {
             await _gameFactory.CreateBuildings();
             await _gameFactory.CreateUnit(_staticData.GetBuildingsData().CastleSpawnPoinUnit);
+        }
+
+        private async Task InitUI()
+        {
+            await _gameFactory.CreateUIDinamic();
+            await _gameFactory.CreateUIResourcesView();
         }
 
         public void ExitState()

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Code.Buildings.CastleBuildings;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
 using Code.GameServices.SaveLoadProgress;
+using Code.UI;
 using Code.Unit;
 using Code.Unit.CraftUnit;
 using UnityEngine;
@@ -16,6 +18,8 @@ namespace Code.GameServices
         
         private readonly IStaticDataService _staticData;
         private readonly IAssetLoader _assetLoader;
+        private Transform _uiDinamicRoot;
+        private StoreBuilding _storeBuilding;
 
         public GameFactory(IStaticDataService staticData, IAssetLoader assetLoader)
         {
@@ -27,6 +31,10 @@ namespace Code.GameServices
         {
             await _assetLoader.Load<GameObject>(AssetAddress.UNIT);
             await _assetLoader.Load<GameObject>(AssetAddress.STORE);
+            await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
+            
+            await _assetLoader.Load<GameObject>(AssetAddress.UIDINAMIC);
+            await _assetLoader.Load<GameObject>(AssetAddress.UIDINAMICUPCONTAINER);
         }
 
         public async Task CreateUnit(Vector3 at)
@@ -48,6 +56,14 @@ namespace Code.GameServices
         public async Task CreateBuildings()
         {
             await CreateStore();
+            await CreateCastle();
+        }
+
+        public async Task CreateUIDinamic()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UIDINAMIC);
+            GameObject uiDinamic = Object.Instantiate(prefab);
+            _uiDinamicRoot = uiDinamic.transform;
         }
 
         private async Task CreateStore()
@@ -56,6 +72,30 @@ namespace Code.GameServices
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, at, Quaternion.identity);
             RegisterProgress(store);
+            
+            _storeBuilding = store.GetComponent<StoreBuilding>();
+        }
+
+        private async Task CreateCastle()
+        {
+            Vector3 at = new Vector3(0, 0, -10);
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
+            GameObject castle = Object.Instantiate(prefab, at, Quaternion.identity);
+            RegisterProgress(castle);
+
+            CastleBuilding castleBuilding = castle.GetComponent<CastleBuilding>();
+            castleBuilding.Constructor(this);
+            castleBuilding.SpawnUnit = false;
+        }
+
+        public async Task CreateUIResourcesView()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UIDINAMICUPCONTAINER);
+            GameObject uiResourcesView = Object.Instantiate(prefab, _uiDinamicRoot);
+            RegisterProgress(uiResourcesView);
+            
+            ResourcesUICount resourcesUICount = uiResourcesView.GetComponent<ResourcesUICount>();
+            // resourcesUICount.Constructor(_storeBuilding);
         }
 
         public void CreateDefender()

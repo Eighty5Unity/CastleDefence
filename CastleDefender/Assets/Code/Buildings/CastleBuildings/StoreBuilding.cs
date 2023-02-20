@@ -8,6 +8,7 @@ namespace Code.Buildings.CastleBuildings
     public class StoreBuilding : MonoBehaviour, ISaveProgress, ILoadProgress
     {
         public event Action<ResourcesType, float> RefreshResources;
+        
         public Transform StorePointPosition;
 
         private float _food;

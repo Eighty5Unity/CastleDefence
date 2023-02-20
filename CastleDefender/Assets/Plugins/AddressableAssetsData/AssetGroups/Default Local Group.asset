@@ -25,6 +25,18 @@ MonoBehaviour:
     m_Address: Store
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 976cc182bbe5e4a4285b5f0bc93ccb6b
+    m_Address: Castle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 390512c553bee4a81af16fe290ecb30f
+    m_Address: DinamicCanvasUp
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b7e0a9dd117f4e1999ddf8f493f6d09
+    m_Address: DinamicUpContainer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

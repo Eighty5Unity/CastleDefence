@@ -87,5 +87,13 @@ namespace Code.Unit.CraftUnit
             _movingToStore = true;
             _moveUnit.MoveToStore();
         }
+
+        private void OnDestroy()
+        {
+            _triggerHandling.CraftResoucesEnter -= EnterResources;
+            _triggerHandling.CraftResoucesExit -= ExitResources;
+            _triggerHandling.StoreBuildingEnter -= EnterStore;
+            _triggerHandling.StoreBuildingExit -= ExitStore;
+        }
     }
 }

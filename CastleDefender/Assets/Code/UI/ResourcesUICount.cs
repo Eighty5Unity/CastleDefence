@@ -21,12 +21,19 @@ namespace Code.UI
         private float _ironCount;
         private float _moneyCount;
         private float _unitCount;
-        private StoreBuilding _store;
+        
+        private StoreBuildingView _store;
 
-        public void Constructor(StoreBuilding store)
+        public void Constructor(StoreBuildingView store)
         {
             _store = store;
             _store.RefreshResources += UpdateUICount;
+        }
+
+        private void UpdateUnitCount()
+        {
+            _unitCount++;
+            RefreshUI();
         }
 
         private void UpdateUICount(ResourcesType type, float count)
@@ -72,6 +79,7 @@ namespace Code.UI
             StoneCount.text = _stoneCount.ToString();
             IronCount.text = _ironCount.ToString();
             MoneyCount.text = _moneyCount.ToString();
+            UnitCount.text = _unitCount.ToString();
         }
 
         private void OnDestroy()

@@ -56,7 +56,7 @@ namespace Code.Unit.CraftUnit
             }
         }
 
-        private void EnterStore(StoreBuilding store)
+        private void EnterStore(StoreBuildingView store)
         {
             if (_onStore)
             {
@@ -66,13 +66,13 @@ namespace Code.Unit.CraftUnit
             if (_movingToStore)
             {
                 _onStore = true;
-                store.UpdateResouces(ResourcesType, ResourcesCount);
+                store.SetResources(ResourcesType, ResourcesCount);
                 ResourcesCount = 0f;
                 _moveUnit.Move(_craftingPosition);
             }
         }
 
-        private void ExitStore(StoreBuilding store)
+        private void ExitStore(StoreBuildingView store)
         {
             _onStore = false;
             _movingToStore = false;

@@ -30,11 +30,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 390512c553bee4a81af16fe290ecb30f
-    m_Address: DinamicCanvasUp
+    m_Address: CanvasUp
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 8b7e0a9dd117f4e1999ddf8f493f6d09
-    m_Address: DinamicUpContainer
+    m_Address: UpContainer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c97bb0e8054294347a2c816d55953a74
+    m_Address: CanvasDown
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 641691dccadfb4ac6b3c1ba6cfe1634b
+    m_Address: DownContainer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c32db9d204bae484f894c49c000a6f7e
+    m_Address: StoreStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

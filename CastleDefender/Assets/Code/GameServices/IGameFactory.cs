@@ -15,7 +15,9 @@ namespace Code.GameServices
         void Cleanup();
         Task CreateUnit(Vector3 at);
         Task CreateBuildings();
-        Task CreateUIDinamic();
-        Task CreateUIResourcesView();
+        Task CreateUpUI();
+        Task CreateDownUI();
+        void CreateUIResourcesView();
+        Task<GameObject> CreateUIDownView();
     }
 }

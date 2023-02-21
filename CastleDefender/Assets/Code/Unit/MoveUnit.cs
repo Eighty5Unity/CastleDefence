@@ -2,13 +2,14 @@ using Code.Buildings;
 using Code.Buildings.ResourcesBuilgings;
 using Code.GameServices;
 using Code.GameServices.InputService;
+using Code.GameServices.SaveLoadProgress;
 using Code.StaticData;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Code.Unit
 {
-    public class MoveUnit : MonoBehaviour
+    public class MoveUnit : MonoBehaviour, ISaveProgress, ILoadProgress
     {
         public NavMeshAgent NavMesh;
         public ResourcesType CraftResourcesType;
@@ -136,6 +137,21 @@ namespace Code.Unit
         private void OnDestroy()
         {
             _clickHandling.MoveHappend -= ChooseBuildingToMove;
+        }
+
+        public void SaveProgress(GameProgress progress)
+        {
+            progress.UnitsProgress.Add(new UnitProgress(){UnitPosition = transform});
+        }
+
+        public void LoadProgress(GameProgress progress)
+        {
+            if (progress.UnitsProgress.Count > 0)
+            {
+                transform.position = progress.UnitsProgress[0].UnitPosition.position;
+                transform.rotation = progress.UnitsProgress[0].UnitPosition.rotation;
+                progress.UnitsProgress.RemoveAt(0);
+            }
         }
     }
 }

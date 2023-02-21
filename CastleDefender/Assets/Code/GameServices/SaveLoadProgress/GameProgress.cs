@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Code.GameServices.SaveLoadProgress
 {
@@ -6,10 +7,12 @@ namespace Code.GameServices.SaveLoadProgress
     public class GameProgress
     {
         public ResourcesProgress ResourcesProgress;
+        public List<UnitProgress> UnitsProgress;
 
         public GameProgress()
         {
             ResourcesProgress = new ResourcesProgress();
+            UnitsProgress = new List<UnitProgress>();
         }
     }
 }

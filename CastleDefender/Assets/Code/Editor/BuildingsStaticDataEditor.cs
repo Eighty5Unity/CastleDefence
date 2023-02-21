@@ -19,8 +19,8 @@ namespace Code.Editor
             if (GUILayout.Button("Create"))
             {
 
-                buildingPointsData.CastleSpawnPoinUnit = FindObjectOfType<CastleBuilding>().SpawnUnitPoint.position;
-                buildingPointsData.StorePoint = FindObjectOfType<StoreBuilding>().StorePointPosition.position;
+                buildingPointsData.CastleSpawnPoinUnit = FindObjectOfType<CastleBuildingView>().SpawnUnitPoint.position;
+                buildingPointsData.StorePoint = FindObjectOfType<StoreBuildingView>().StorePointPosition.position;
 
                 var food = FindObjectOfType<FoodBuilding>();
                 buildingPointsData.FoodType = food.ResourcesType;

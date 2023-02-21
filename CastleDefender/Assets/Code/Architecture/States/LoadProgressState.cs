@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Code.GameServices;
 using Code.GameServices.SaveLoadProgress;
 
 namespace Code.Architecture.States
@@ -15,7 +17,7 @@ namespace Code.Architecture.States
             _saveLoadService = saveLoadService;
         }
 
-        public void EnterState()
+        public  void EnterState()
         {
             LoadProgress();
             _stateMachine.EnterState<LoadLevelState, string>("GameLevel");
@@ -34,6 +36,14 @@ namespace Code.Architecture.States
         private GameProgress NewProgress()
         {
             GameProgress progress = new GameProgress();
+            
+            ResourcesProgress resources = progress.ResourcesProgress;
+            resources.Food = 0f;
+            resources.Wood = 0f;
+            resources.Stone = 0f;
+            resources.Iron = 0f;
+            resources.Money = 0f;
+            
             return progress;
         }
     }

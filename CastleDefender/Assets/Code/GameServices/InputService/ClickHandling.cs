@@ -8,7 +8,8 @@ namespace Code.GameServices.InputService
     {
         public ClickHandlingType ClickHandlingType;
         public BuildingType BuildingType;
-        public event Action ClickHappend;
+        public event Action OnClickHappend;
+        public event Action OffClickHappend;
         public event Action<ClickHandling> MoveHappend;
         private Outline _outline;
 
@@ -21,12 +22,13 @@ namespace Code.GameServices.InputService
         public void OnClick()
         {
             _outline.OutlineWidth = 5f;
-            ClickHappend?.Invoke();
+            OnClickHappend?.Invoke();
         }
 
         public void OffClick()
         {
             _outline.OutlineWidth = 0f;
+            OffClickHappend?.Invoke();
         }
 
         public void MoveUnit(ClickHandling building)

@@ -12,6 +12,11 @@ namespace Code.GameServices.AssetService
 
         private readonly Dictionary<string, List<AsyncOperationHandle>> _handles =
             new Dictionary<string, List<AsyncOperationHandle>>();
+
+        public void Initialize()
+        {
+            Addressables.InitializeAsync();
+        }
         
         public async Task<T> Load<T>(string prefab) where T : class
         {

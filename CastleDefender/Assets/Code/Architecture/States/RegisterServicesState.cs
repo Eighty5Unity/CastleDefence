@@ -33,16 +33,23 @@ namespace Code.Architecture.States
 
         private void RegisterServices()
         {
-            RegisterAndLoadStaticData();
-            
+            RegisteStaticData();
+            RegisterAssetLoader();
             _services.RegisterService<IProgressService>(new ProgressService());
             _services.RegisterService<IStatesMachine>(_statesMachine);
-            _services.RegisterService<IAssetLoader>(new AssetLoader());
+            
             _services.RegisterService<IGameFactory>(new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>()));
             _services.RegisterService<ISaveLoadService>(new SaveLoadService(_services.GetService<IProgressService>(), _services.GetService<IGameFactory>()));
         }
 
-        private void RegisterAndLoadStaticData()
+        private void RegisterAssetLoader()
+        {
+            IAssetLoader assetLoader = new AssetLoader();
+            assetLoader.Initialize();
+            _services.RegisterService<IAssetLoader>(assetLoader);
+        }
+
+        private void RegisteStaticData()
         {
             IStaticDataService staticData = new StaticDataService();
             staticData.LoadBuildings();

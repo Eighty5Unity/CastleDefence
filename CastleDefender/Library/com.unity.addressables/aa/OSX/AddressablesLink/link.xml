@@ -18,6 +18,7 @@
     <type fullname="UnityEngine.MeshFilter" preserve="all" />
     <type fullname="UnityEngine.Shader" preserve="all" />
     <type fullname="UnityEngine.Object" preserve="all" />
+    <type fullname="UnityEngine.Sprite" preserve="all" />
     <type fullname="UnityEngine.RectTransform" preserve="all" />
     <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
@@ -26,6 +27,13 @@
     <type fullname="UnityEngine.Rigidbody" preserve="all" />
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
     <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
+    <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.Image" preserve="all" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Outline" preserve="all" />
@@ -44,19 +52,16 @@
     <type fullname="TMPro.TMP_GlyphValueRecord" preserve="nothing" serialized="true" />
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
   </assembly>
-  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
-    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
-    <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
-    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
-  </assembly>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Code.GameServices.InputService.ClickHandling" preserve="all" />
     <type fullname="Code.Unit.MoveUnit" preserve="all" />
-    <type fullname="Code.Unit.CraftUnit.CraftResourcesUnit" preserve="all" />
-    <type fullname="Code.Buildings.CastleBuildings.StoreBuilding" preserve="all" />
+    <type fullname="Code.GameServices.InputService.ClickHandling" preserve="all" />
     <type fullname="Code.Unit.OnTriggerHandlingUnit" preserve="all" />
-    <type fullname="Code.Buildings.CastleBuildings.CastleBuilding" preserve="all" />
+    <type fullname="Code.Buildings.CastleBuildings.CastleBuildingView" preserve="all" />
+    <type fullname="Code.Buildings.CastleBuildings.StoreBuildingView" preserve="all" />
+    <type fullname="Code.UI.ResourcesUICount" preserve="all" />
+    <type fullname="Code.Unit.CraftUnit.CraftResourcesUnit" preserve="all" />
+    <type fullname="Code.UI.DownInformationUI" preserve="all" />
+    <type fullname="Code.StaticData.DownInformationStaticData" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />

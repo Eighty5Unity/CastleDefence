@@ -10,8 +10,10 @@ namespace Code.GameServices.AssetService
         public const string UI_DOWN_CANVAS = "CanvasDown";
         public const string UI_UP_CONTAINER = "UpContainer";
         public const string UI_DOWN_CONTAINER = "DownContainer";
+        public const string UI_DOWN_BUTTON = "DownUIButton";
 
         public const string STATIC_DATA_STORE = "StoreStaticData";
+        public const string STATIC_DATA_CASTLE = "CastleStaticData";
 
     }
 }

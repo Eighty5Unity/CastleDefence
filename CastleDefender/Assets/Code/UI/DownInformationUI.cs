@@ -9,6 +9,7 @@ namespace Code.UI
         public Image Icon;
         public TextMeshProUGUI Name;
         public TextMeshProUGUI Description;
-        
+        public Transform ButtonsPosition;
+
     }
 }

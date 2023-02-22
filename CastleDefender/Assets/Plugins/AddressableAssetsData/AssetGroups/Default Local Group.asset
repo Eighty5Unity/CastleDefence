@@ -49,6 +49,14 @@ MonoBehaviour:
     m_Address: StoreStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 9ecb1d6437b324aa8b241302ecc5c05c
+    m_Address: CastleStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0850d1e0423564217a5875926addb141
+    m_Address: DownUIButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

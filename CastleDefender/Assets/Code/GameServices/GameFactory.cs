@@ -46,8 +46,10 @@ namespace Code.GameServices
             await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CANVAS);
             await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CONTAINER);
             await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
+            await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
 
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
         }
 
         public async Task CreateUnit(Vector3 at)
@@ -79,8 +81,34 @@ namespace Code.GameServices
             GameObject castle = Object.Instantiate(prefab, BuildingsPositionInWorld.CastlePosition, Quaternion.identity);
             RegisterProgress(castle);
             _castleBuildingView = castle.GetComponent<CastleBuildingView>();
+            ClickHandling clickHandling = castle.GetComponentInChildren<ClickHandling>();
+
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            GameObject buttonCreateUnitPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonCreateUnit = Object.Instantiate(buttonCreateUnitPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonCreateUnitView = buttonCreateUnit.GetComponent<DownUIButtonView>();
             
-            _castleController = new CastleBuildingController(this, _castleBuildingView);
+            foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
+            {
+                if (buttonInfo.ButtonName == "CreateUnit")
+                {
+                    buttonCreateUnitView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonCreateUnitView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+            }
+            
+            // buttonCreateUnit.transform.parent = infoView.ButtonsPosition;
+            
+            downPanelView.SetActive(false);
+            
+            _castleController = new CastleBuildingController(this, _castleBuildingView, downPanelView, clickHandling, buttonCreateUnitView.Button);
         }
 
         private async Task CreateStore()

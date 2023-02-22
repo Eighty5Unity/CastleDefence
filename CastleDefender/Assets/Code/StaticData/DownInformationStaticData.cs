@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.StaticData
@@ -8,5 +9,6 @@ namespace Code.StaticData
         public Sprite Icon;
         public string Name;
         public string Descriptions;
+        public List<UIButtonInfo> Buttons;
     }
 }

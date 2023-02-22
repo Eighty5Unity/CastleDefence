@@ -33,17 +33,9 @@ namespace Code.Architecture.States
             InitUI();
             await InitGameWorld();
             InformProgressLoaders();
-            _gameFactory.CreateUIResourcesView();
+            InitUIResourcesPanel();
 
             _statesMachine.EnterState<GameLoopState>();
-        }
-
-        private void InformProgressLoaders()
-        {
-            foreach (ILoadProgress loadProgress in _gameFactory.LoadProgress)
-            {
-                loadProgress.LoadProgress(_progressService.Progress);
-            }
         }
 
         private async Task InitGameWorld()
@@ -55,6 +47,19 @@ namespace Code.Architecture.States
         {
             await _gameFactory.CreateUpUI();
             await _gameFactory.CreateDownUI();
+        }
+
+        private void InformProgressLoaders()
+        {
+            foreach (ILoadProgress loadProgress in _gameFactory.LoadProgress)
+            {
+                loadProgress.LoadProgress(_progressService.Progress);
+            }
+        }
+
+        private void InitUIResourcesPanel()
+        {
+            _gameFactory.CreateUIResourcesView();
         }
 
         public void ExitState()

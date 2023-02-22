@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
+using Code.Buildings.ResourcesBuilgings;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
 using Code.GameServices.SaveLoadProgress;
@@ -30,10 +31,14 @@ namespace Code.GameServices
         private StoreBuildingView _storeBuildingView;
         private StoreBuildingController _storeController;
 
+        private ResourcesCount _resourcesCount;
+
         public GameFactory(IStaticDataService staticData, IAssetLoader assetLoader)
         {
             _staticData = staticData;
             _assetLoader = assetLoader;
+
+            _resourcesCount = new ResourcesCount();//TODO register save/load
         }
 
         public async Task LoadAddressableAssets()
@@ -60,7 +65,7 @@ namespace Code.GameServices
 
             ClickHandling clickHandling = unit.GetComponentInChildren<ClickHandling>();
             OnTriggerHandlingUnit triggerHandling = unit.GetComponentInChildren<OnTriggerHandlingUnit>();
-            
+
             MoveUnit move = unit.GetComponentInChildren<MoveUnit>();
             move.Counstructor(_staticData, clickHandling);
 
@@ -79,7 +84,6 @@ namespace Code.GameServices
         {
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
             GameObject castle = Object.Instantiate(prefab, BuildingsPositionInWorld.CastlePosition, Quaternion.identity);
-            RegisterProgress(castle);
             _castleBuildingView = castle.GetComponent<CastleBuildingView>();
             ClickHandling clickHandling = castle.GetComponentInChildren<ClickHandling>();
 
@@ -104,18 +108,15 @@ namespace Code.GameServices
                 }
             }
             
-            // buttonCreateUnit.transform.parent = infoView.ButtonsPosition;
-            
             downPanelView.SetActive(false);
             
-            _castleController = new CastleBuildingController(this, _castleBuildingView, downPanelView, clickHandling, buttonCreateUnitView.Button);
+            _castleController = new CastleBuildingController(this, _castleBuildingView, downPanelView, clickHandling, buttonCreateUnitView.Button, _resourcesCount);
         }
 
         private async Task CreateStore()
         {
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, BuildingsPositionInWorld.StorePosition, Quaternion.identity);
-            RegisterProgress(store);
             _storeBuildingView = store.GetComponent<StoreBuildingView>();
             ClickHandling clickHandling = store.GetComponentInChildren<ClickHandling>();
 
@@ -126,9 +127,23 @@ namespace Code.GameServices
             infoView.Name.text = prefabStaticData.Name;
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
+            
+            GameObject buttonOpenStorePrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonOpenStore = Object.Instantiate(buttonOpenStorePrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonOpenStoreView = buttonOpenStore.GetComponent<DownUIButtonView>();
+
+            foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
+            {
+                if (buttonInfo.ButtonName == "OpenStore")
+                {
+                    buttonOpenStoreView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonOpenStoreView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+            }
+            
             downPanelView.SetActive(false);
 
-            _storeController = new StoreBuildingController(_storeBuildingView, downPanelView, clickHandling);
+            _storeController = new StoreBuildingController(this, _storeBuildingView, downPanelView, clickHandling, buttonOpenStoreView.Button, _resourcesCount);
         }
 
         private async Task CreateBarracks()
@@ -157,7 +172,7 @@ namespace Code.GameServices
 
             ResourcesUICount resourcesUICount = uiResourcesView.GetComponent<ResourcesUICount>();
 
-            resourcesUICount.Constructor(_storeBuildingView);
+            resourcesUICount.Constructor(_resourcesCount);
         }
 
         public async Task<GameObject> CreateUIDownView()
@@ -165,6 +180,11 @@ namespace Code.GameServices
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             GameObject uiDownView = Object.Instantiate(prefab);
             return uiDownView;
+        }
+
+        public GameObject CreateUIStoreWindow()
+        {
+            return new GameObject();
         }
 
         public void CreateDefender()

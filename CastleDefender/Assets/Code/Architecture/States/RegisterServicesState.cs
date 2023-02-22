@@ -1,7 +1,6 @@
 using Code.GameServices;
 using Code.GameServices.AssetService;
 using Code.GameServices.SaveLoadProgress;
-using UnityEngine;
 
 namespace Code.Architecture.States
 {
@@ -37,9 +36,14 @@ namespace Code.Architecture.States
             RegisterAssetLoader();
             _services.RegisterService<IProgressService>(new ProgressService());
             _services.RegisterService<IStatesMachine>(_statesMachine);
-            
-            _services.RegisterService<IGameFactory>(new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>()));
+            RegisterGameFactory();
             _services.RegisterService<ISaveLoadService>(new SaveLoadService(_services.GetService<IProgressService>(), _services.GetService<IGameFactory>()));
+        }
+
+        private void RegisterGameFactory()
+        {
+            IGameFactory gameFactory = new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>());
+            _services.RegisterService<IGameFactory>(gameFactory);
         }
 
         private void RegisterAssetLoader()

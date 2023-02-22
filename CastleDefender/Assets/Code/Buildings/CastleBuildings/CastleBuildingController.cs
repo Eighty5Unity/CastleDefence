@@ -1,3 +1,4 @@
+using Code.Buildings.ResourcesBuilgings;
 using Code.GameServices;
 using Code.GameServices.InputService;
 using UnityEngine;
@@ -12,22 +13,35 @@ namespace Code.Buildings.CastleBuildings
         private readonly GameObject _uiView;
         private readonly ClickHandling _clickHandling;
         private readonly Button _createUnitButton;
+        private readonly ResourcesCount _resourcesCount;
 
-        public CastleBuildingController(IGameFactory factory, CastleBuildingView castleView, GameObject uiView, ClickHandling clickHandling, Button createUnit)
+        public CastleBuildingController(IGameFactory factory, CastleBuildingView castleView, GameObject uiView, ClickHandling clickHandling, Button createUnit, ResourcesCount resourcesCount)
         {
             _gameFactory = factory;
             _castleView = castleView;
             _uiView = uiView;
+            _resourcesCount = resourcesCount;
+            
             _clickHandling = clickHandling;
             _clickHandling.OnClickHappend += OnClick;
             _clickHandling.OffClickHappend += OffClick;
+            
             _createUnitButton = createUnit;
             _createUnitButton.onClick.AddListener(CreateUnit);
         }
 
         private void CreateUnit()
         {
-            _gameFactory.CreateUnit(_castleView.SpawnUnitPoint.position);
+            if (_resourcesCount.CheckEnoughResources(CostEverything.Unit))
+            {
+                _gameFactory.CreateUnit(_castleView.SpawnUnitPoint.position);
+                _resourcesCount.RemoveResourcesCount(CostEverything.Unit);
+            }
+            else
+            {
+                Debug.Log("Not resources to make a Unit!");
+            }
+           
         }
 
         private void OnClick()

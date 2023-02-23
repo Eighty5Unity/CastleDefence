@@ -1,4 +1,3 @@
-using System;
 using Code.Architecture.States;
 using UnityEngine;
 

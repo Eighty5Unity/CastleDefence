@@ -15,7 +15,13 @@ namespace Code.Buildings.CastleBuildings
         private readonly Button _createUnitButton;
         private readonly ResourcesCount _resourcesCount;
 
-        public CastleBuildingController(IGameFactory factory, CastleBuildingView castleView, GameObject uiView, ClickHandling clickHandling, Button createUnit, ResourcesCount resourcesCount)
+        public CastleBuildingController(
+            IGameFactory factory, 
+            CastleBuildingView castleView, 
+            GameObject uiView, 
+            ClickHandling clickHandling, 
+            Button createUnit, 
+            ResourcesCount resourcesCount)
         {
             _gameFactory = factory;
             _castleView = castleView;
@@ -41,7 +47,6 @@ namespace Code.Buildings.CastleBuildings
             {
                 Debug.Log("Not resources to make a Unit!");
             }
-           
         }
 
         private void OnClick()

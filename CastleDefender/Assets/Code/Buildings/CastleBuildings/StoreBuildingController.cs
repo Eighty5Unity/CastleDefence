@@ -16,7 +16,13 @@ namespace Code.Buildings.CastleBuildings
         private readonly ResourcesCount _resourcesCount;
         private GameObject _storeWindow;
 
-        public StoreBuildingController(IGameFactory factory, StoreBuildingView storeView, GameObject uiView, ClickHandling clickHandling, Button openStore, ResourcesCount resourcesCount)
+        public StoreBuildingController(
+            IGameFactory factory, 
+            StoreBuildingView storeView, 
+            GameObject uiView, 
+            ClickHandling clickHandling, 
+            Button openStore, 
+            ResourcesCount resourcesCount)
         {
             _gameFactory = factory;
             _resourcesCount = resourcesCount;
@@ -40,7 +46,6 @@ namespace Code.Buildings.CastleBuildings
             {
                 _storeWindow = _gameFactory.CreateUIStoreWindow();
             }
-            
             _storeWindow.SetActive(true);
         }
 

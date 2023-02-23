@@ -41,7 +41,6 @@ namespace Code.Unit.CraftUnit
             {
                 return;
             }
-            
             _isCrafting = true;
             ResourcesType = resources.ResourcesType;
             StartCoroutine(Craft());

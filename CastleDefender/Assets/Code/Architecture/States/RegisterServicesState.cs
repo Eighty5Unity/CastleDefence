@@ -6,7 +6,7 @@ namespace Code.Architecture.States
 {
     public class RegisterServicesState : IEnterState
     {
-        private const string GAME_START_SCENE = "GameStart";
+        private const string LEVEL_NAME = "GameStart";
         private readonly IStatesMachine _statesMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly AllServicesSingleton _services;
@@ -22,7 +22,7 @@ namespace Code.Architecture.States
 
         public void EnterState()
         {
-            _sceneLoader.Load(GAME_START_SCENE, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(LEVEL_NAME, onLoaded: EnterLoadLevel);
         }
 
         public void ExitState()
@@ -34,16 +34,17 @@ namespace Code.Architecture.States
         {
             RegisteStaticData();
             RegisterAssetLoader();
-            _services.RegisterService<IProgressService>(new ProgressService());
-            _services.RegisterService<IStatesMachine>(_statesMachine);
+            RegisterGameProgress();
+            RegisterStateMachine();
             RegisterGameFactory();
-            _services.RegisterService<ISaveLoadService>(new SaveLoadService(_services.GetService<IProgressService>(), _services.GetService<IGameFactory>()));
+            RegisterSaveLoad();
         }
 
-        private void RegisterGameFactory()
+        private void RegisteStaticData()
         {
-            IGameFactory gameFactory = new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>());
-            _services.RegisterService<IGameFactory>(gameFactory);
+            IStaticDataService staticData = new StaticDataService();
+            staticData.LoadBuildings();
+            _services.RegisterService<IStaticDataService>(staticData);
         }
 
         private void RegisterAssetLoader()
@@ -53,11 +54,26 @@ namespace Code.Architecture.States
             _services.RegisterService<IAssetLoader>(assetLoader);
         }
 
-        private void RegisteStaticData()
+        private void RegisterGameProgress()
         {
-            IStaticDataService staticData = new StaticDataService();
-            staticData.LoadBuildings();
-            _services.RegisterService<IStaticDataService>(staticData);
+            _services.RegisterService<IProgressService>(new ProgressService());
+        }
+
+        private void RegisterStateMachine()
+        {
+            _services.RegisterService<IStatesMachine>(_statesMachine);
+        }
+
+        private void RegisterGameFactory()
+        {
+            IGameFactory gameFactory = new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>());
+            _services.RegisterService<IGameFactory>(gameFactory);
+        }
+
+        private void RegisterSaveLoad()
+        {
+            _services.RegisterService<ISaveLoadService>(new SaveLoadService(_services.GetService<IProgressService>(),
+                _services.GetService<IGameFactory>()));
         }
 
         private void EnterLoadLevel()

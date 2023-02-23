@@ -30,23 +30,23 @@ namespace Code.Architecture.States
 
         private async void OnLoaded()
         {
-            InitUI();
+            InitUICanvas();
             await InitGameWorld();
             InformProgressLoaders();
-            InitUIResourcesPanel();
+            InitUIResourcesView();
 
             _statesMachine.EnterState<GameLoopState>();
+        }
+
+        private async void InitUICanvas()
+        {
+            await _gameFactory.CreateUpUI();
+            await _gameFactory.CreateDownUI();
         }
 
         private async Task InitGameWorld()
         {
             await _gameFactory.CreateBuildings();
-        }
-
-        private async void InitUI()
-        {
-            await _gameFactory.CreateUpUI();
-            await _gameFactory.CreateDownUI();
         }
 
         private void InformProgressLoaders()
@@ -57,7 +57,7 @@ namespace Code.Architecture.States
             }
         }
 
-        private void InitUIResourcesPanel()
+        private void InitUIResourcesView()
         {
             _gameFactory.CreateUIResourcesView();
         }

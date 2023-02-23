@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
-using Code.GameServices;
 using Code.GameServices.SaveLoadProgress;
 
 namespace Code.Architecture.States
 {
     public class LoadProgressState : IEnterState
     {
+        private const string LEVEL_NAME = "GameLevel";
         private readonly IStatesMachine _stateMachine;
         private readonly IProgressService _progress;
         private readonly ISaveLoadService _saveLoadService;
@@ -20,7 +19,7 @@ namespace Code.Architecture.States
         public  void EnterState()
         {
             LoadProgress();
-            _stateMachine.EnterState<LoadLevelState, string>("GameLevel");
+            _stateMachine.EnterState<LoadLevelState, string>(LEVEL_NAME);
         }
 
         public void ExitState()
@@ -35,16 +34,7 @@ namespace Code.Architecture.States
 
         private GameProgress NewProgress()
         {
-            GameProgress progress = new GameProgress();
-            
-            ResourcesProgress resources = progress.ResourcesProgress;
-            resources.Food = 0f;
-            resources.Wood = 0f;
-            resources.Stone = 0f;
-            resources.Iron = 0f;
-            resources.Money = 0f;
-            
-            return progress;
+            return new GameProgress();
         }
     }
 }

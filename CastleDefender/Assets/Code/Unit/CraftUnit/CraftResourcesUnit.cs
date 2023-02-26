@@ -27,7 +27,21 @@ namespace Code.Unit.CraftUnit
             _triggerHandling.StoreBuildingEnter += EnterStore;
             _triggerHandling.StoreBuildingExit += ExitStore;
 
+            _triggerHandling.BarracksBuildingEnter += EnterBarracks;
+            _triggerHandling.BarracksBuildingExit += ExitBarracks;
+
             ResourcesType = ResourcesType.Unknow;
+        }
+
+        private void EnterBarracks(BarracksBuildingView barracksView)
+        {
+            barracksView.UnitToDefender++;
+            Destroy(gameObject);
+        }
+
+        private void ExitBarracks(BarracksBuildingView barracksView)
+        {
+            
         }
 
         private void EnterResources(CraftResourcesBuilding resources)
@@ -93,6 +107,8 @@ namespace Code.Unit.CraftUnit
             _triggerHandling.CraftResoucesExit -= ExitResources;
             _triggerHandling.StoreBuildingEnter -= EnterStore;
             _triggerHandling.StoreBuildingExit -= ExitStore;
+            _triggerHandling.BarracksBuildingEnter -= EnterBarracks;
+            _triggerHandling.BarracksBuildingExit -= ExitBarracks;
         }
     }
 }

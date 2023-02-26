@@ -30,6 +30,9 @@ namespace Code.GameServices
 
         private StoreBuildingView _storeBuildingView;
         private StoreBuildingController _storeController;
+        
+        private BarracksBuildingView _barracksBuildingView;
+        private BarracksBuildingController _barracksController;
 
         private ResourcesCount _resourcesCount;
 
@@ -46,6 +49,7 @@ namespace Code.GameServices
             await _assetLoader.Load<GameObject>(AssetAddress.UNIT);
             await _assetLoader.Load<GameObject>(AssetAddress.STORE);
             await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
+            await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
             
             await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CANVAS);
             await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CANVAS);
@@ -55,6 +59,7 @@ namespace Code.GameServices
 
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
         }
 
         public async Task CreateUnit(Vector3 at)
@@ -77,7 +82,7 @@ namespace Code.GameServices
         {
             await CreateStore();
             await CreateCastle();
-            // await CreateBarracks();
+            await CreateBarracks();
         }
 
         private async Task CreateCastle()
@@ -148,6 +153,35 @@ namespace Code.GameServices
 
         private async Task CreateBarracks()
         {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
+            GameObject barracks = Object.Instantiate(prefab, BuildingsPositionInWorld.BarracksPosition, Quaternion.identity);
+            _barracksBuildingView = barracks.GetComponent<BarracksBuildingView>();
+            ClickHandling clickHandling = barracks.GetComponentInChildren<ClickHandling>();
+
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            GameObject buttonCreateDefenderPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonCreateDefender = Object.Instantiate(buttonCreateDefenderPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonCreateDefenderView = buttonCreateDefender.GetComponent<DownUIButtonView>();
+
+            foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
+            {
+                if (buttonInfo.ButtonName == "CreateDefender")
+                {
+                    buttonCreateDefenderView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonCreateDefenderView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+            }
+
+            downPanelView.SetActive(false);
+
+            _barracksController = new BarracksBuildingController(this, _barracksBuildingView, downPanelView, clickHandling, buttonCreateDefenderView.Button, _resourcesCount);
         }
 
         public async Task CreateUpUI()
@@ -189,7 +223,7 @@ namespace Code.GameServices
 
         public void CreateDefender()
         {
-            
+            Debug.Log("Create Defender");
         }
 
         public void CreateEnemy()

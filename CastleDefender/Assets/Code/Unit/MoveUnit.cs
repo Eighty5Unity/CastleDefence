@@ -21,6 +21,7 @@ namespace Code.Unit
         private Vector3 _craftStonePoint;
         private Vector3 _craftIronPoint;
         private Vector3 _storePoint;
+        private Vector3 _barracksPoint = new Vector3(2.84f, 0.5f, 0f);
 
         public void Counstructor(IStaticDataService staticData, ClickHandling clickHandling)
         {
@@ -116,7 +117,7 @@ namespace Code.Unit
 
         private void MoveToBarracks()
         {
-            Debug.Log("MoveToBarracks");
+            Move(_barracksPoint);
         }
 
         private void MoveToSmithy()

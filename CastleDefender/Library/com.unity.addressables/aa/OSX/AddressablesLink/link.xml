@@ -73,6 +73,7 @@
     <type fullname="Code.UI.DownInformationUI" preserve="all" />
     <type fullname="Code.StaticData.DownInformationStaticData" preserve="all" />
     <type fullname="Code.UI.DownUIButtonView" preserve="all" />
+    <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />

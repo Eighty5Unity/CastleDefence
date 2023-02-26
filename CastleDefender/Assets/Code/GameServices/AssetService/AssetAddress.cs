@@ -9,6 +9,9 @@ namespace Code.GameServices.AssetService
 
         public const string STORE = "Store";
         public const string STATIC_DATA_STORE = "StoreStaticData";
+        
+        public const string BARRACKS = "Barracks";
+        public const string STATIC_DATA_BARRACKS = "BarracksStaticData";
 
         public const string UI_UP_CANVAS = "CanvasUp";
         public const string UI_DOWN_CANVAS = "CanvasDown";

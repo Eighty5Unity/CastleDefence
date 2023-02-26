@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c7c6ef404b427eb2c5fd75b947f3b2, type: 3}
   m_Name: StoreStaticData
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+  Icon: {fileID: 21300000, guid: de71e893b7ba7477a83cedc635813960, type: 3}
   Name: Store
   Descriptions: Store descriptions
+  Buttons:
+  - ButtonIcon: {fileID: 21300000, guid: de71e893b7ba7477a83cedc635813960, type: 3}
+    ButtonName: OpenStore

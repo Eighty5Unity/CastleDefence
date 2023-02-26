@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GOLD
+  m_text: MONEY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1566,7 +1566,6 @@ Transform:
   m_Children:
   - {fileID: 1916438027}
   - {fileID: 8923318487583847084}
-  - {fileID: 8462862455647753693}
   m_Father: {fileID: 853309411}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3688,88 +3687,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6839337853775340943, guid: ce3faaebd0cd743749357406a1ca1b9e, type: 3}
   m_PrefabInstance: {fileID: 6677073964416088589}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8462862455647753692
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 763680571}
-    m_Modifications:
-    - target: {fileID: 1247072604118045293, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5756842254615209886, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5756842254615209886, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5756842254615209886, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345243625914622017, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_Name
-      value: Barracks
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345243625914622017, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
---- !u!4 &8462862455647753693 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3327898172572378651, guid: 3f52e74d04ad949fb9663f48f017fe53, type: 3}
-  m_PrefabInstance: {fileID: 8462862455647753692}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8706787671199136356
 PrefabInstance:

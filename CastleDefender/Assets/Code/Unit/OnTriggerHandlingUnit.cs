@@ -11,9 +11,12 @@ namespace Code.Unit
         public event Action<CraftResourcesBuilding> CraftResoucesExit;
         public event Action<StoreBuildingView> StoreBuildingEnter;
         public event Action<StoreBuildingView> StoreBuildingExit;
-        
+        public event Action<BarracksBuildingView> BarracksBuildingEnter; 
+        public event Action<BarracksBuildingView> BarracksBuildingExit;
+
         private CraftResourcesBuilding _resourcesBuilding;
         private StoreBuildingView _storeBuildingView;
+        private BarracksBuildingView _barracksBuildingView;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -24,6 +27,10 @@ namespace Code.Unit
             else if (other.TryGetComponent<StoreBuildingView>(out _storeBuildingView))
             {
                 StoreBuildingEnter?.Invoke(_storeBuildingView);
+            }
+            else if (other.TryGetComponent<BarracksBuildingView>(out _barracksBuildingView))
+            {
+                BarracksBuildingEnter?.Invoke(_barracksBuildingView);
             }
         }
 
@@ -36,6 +43,10 @@ namespace Code.Unit
             else if (other.TryGetComponent<StoreBuildingView>(out _storeBuildingView))
             {
                 StoreBuildingExit?.Invoke(_storeBuildingView);
+            }
+            else if (other.TryGetComponent<BarracksBuildingView>(out _barracksBuildingView))
+            {
+                BarracksBuildingExit?.Invoke(_barracksBuildingView);
             }
         }
     }

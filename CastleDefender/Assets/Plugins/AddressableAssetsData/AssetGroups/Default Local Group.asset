@@ -57,6 +57,14 @@ MonoBehaviour:
     m_Address: DownUIButton
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 3f52e74d04ad949fb9663f48f017fe53
+    m_Address: Barracks
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8800307d2aba4456899a4c5967978de3
+    m_Address: BarracksStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

@@ -10,6 +10,14 @@ namespace Code.Buildings
             [ResourcesType.Food] = 10f,
         };
 
+        public static Dictionary<ResourcesType,float> Defender = new Dictionary<ResourcesType, float>()
+        {
+            [ResourcesType.Food] = 10f,
+            [ResourcesType.Wood] = 10f,
+            [ResourcesType.Iron] = 10f,
+            [ResourcesType.Money] = 1f,
+        };
+
         public static Dictionary<ResourcesType, float> UpgrateFoodCraft = new Dictionary<ResourcesType, float>()
         {
             [ResourcesType.Wood] = 100f,
@@ -17,12 +25,25 @@ namespace Code.Buildings
             [ResourcesType.Money] = 10f,
         };
 
-        public static Dictionary<ResourcesType,float> Defender = new Dictionary<ResourcesType, float>()
+        public static Dictionary<ResourcesType, float> UpgrateWoodCraft = new Dictionary<ResourcesType, float>()
         {
-            [ResourcesType.Food] = 10f,
             [ResourcesType.Wood] = 10f,
-            [ResourcesType.Iron] = 10f,
-            [ResourcesType.Money] = 1f,
+            [ResourcesType.Iron] = 0f,
+            [ResourcesType.Money] = 0f,
+        };
+
+        public static Dictionary<ResourcesType, float> UpgrateStoneCraft = new Dictionary<ResourcesType, float>()
+        {
+            [ResourcesType.Wood] = 100f,
+            [ResourcesType.Iron] = 50f,
+            [ResourcesType.Money] = 10f,
+        };
+
+        public static Dictionary<ResourcesType, float> UpgrateIronCraft = new Dictionary<ResourcesType, float>()
+        {
+            [ResourcesType.Wood] = 100f,
+            [ResourcesType.Iron] = 50f,
+            [ResourcesType.Money] = 10f,
         };
     }
 }

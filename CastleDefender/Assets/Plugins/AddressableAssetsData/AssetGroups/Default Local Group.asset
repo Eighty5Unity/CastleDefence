@@ -65,6 +65,14 @@ MonoBehaviour:
     m_Address: BarracksStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 45a0bcccd5f004dae82c9a5ea7e1610c
+    m_Address: Smithy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 94ed87f585ad7460b8d38464d07ad39a
+    m_Address: SmithyStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

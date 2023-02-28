@@ -16,10 +16,12 @@ namespace Code.Unit.CraftUnit
         private bool _onStore;
         private bool _movingToStore;
         private Vector3 _craftingPosition;
+        private CraftDevelopment _craftDevelopment;
 
-        public void Constructor(OnTriggerHandlingUnit triggerHandling, MoveUnit move)
+        public void Constructor(OnTriggerHandlingUnit triggerHandling, MoveUnit move, CraftDevelopment craftDevelopment)
         {
             _moveUnit = move;
+            _craftDevelopment = craftDevelopment;
             
             _triggerHandling = triggerHandling;
             _triggerHandling.CraftResoucesEnter += EnterResources;
@@ -57,7 +59,7 @@ namespace Code.Unit.CraftUnit
             }
             _isCrafting = true;
             ResourcesType = resources.ResourcesType;
-            StartCoroutine(Craft());
+            StartCoroutine(Craft(ResourcesType));
         }
 
         private void ExitResources(CraftResourcesBuilding resources)
@@ -65,7 +67,7 @@ namespace Code.Unit.CraftUnit
             _isCrafting = false;
             if (!_movingToStore)
             {
-                StopCoroutine(Craft());
+                StopCoroutine(Craft(ResourcesType));
             }
         }
 
@@ -91,11 +93,12 @@ namespace Code.Unit.CraftUnit
             _movingToStore = false;
         }
 
-        private IEnumerator Craft()
+        private IEnumerator Craft(ResourcesType type)
         {
-            yield return new WaitForSeconds(5f);
             
-            ResourcesCount = 10f;
+            yield return new WaitForSeconds(_craftDevelopment.CraftTime(type));
+            
+            ResourcesCount = _craftDevelopment.CraftCount(type);
             _craftingPosition = transform.position;
             _movingToStore = true;
             _moveUnit.MoveToStore();

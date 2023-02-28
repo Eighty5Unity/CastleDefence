@@ -19,6 +19,5 @@ namespace Code.GameServices
         Task CreateDownUI();
         void CreateUIResourcesView();
         Task<GameObject> CreateUIDownView();
-        GameObject CreateUIStoreWindow();
     }
 }

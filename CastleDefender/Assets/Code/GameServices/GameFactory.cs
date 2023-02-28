@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
-using Code.Buildings.ResourcesBuilgings;
+using Code.GameBalance;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
 using Code.GameServices.SaveLoadProgress;
@@ -140,22 +140,49 @@ namespace Code.GameServices
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
             
-            GameObject buttonOpenStorePrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonOpenStore = Object.Instantiate(buttonOpenStorePrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonOpenStoreView = buttonOpenStore.GetComponent<DownUIButtonView>();
+            GameObject buttonSellFoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonSellFood = Object.Instantiate(buttonSellFoodPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonSellFoodView = buttonSellFood.GetComponent<DownUIButtonView>();
+            
+            GameObject buttonSellWoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonSellWood = Object.Instantiate(buttonSellWoodPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonSellWoodView = buttonSellWood.GetComponent<DownUIButtonView>();
+            
+            GameObject buttonSellStonePrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonSellStone = Object.Instantiate(buttonSellStonePrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonSellStoneView = buttonSellStone.GetComponent<DownUIButtonView>();
+            
+            GameObject buttonSellIronPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonSellIron = Object.Instantiate(buttonSellIronPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonSellIronView = buttonSellIron.GetComponent<DownUIButtonView>();
 
             foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
             {
-                if (buttonInfo.ButtonName == "OpenStore")
+                if (buttonInfo.ButtonName == "SellFood")
                 {
-                    buttonOpenStoreView.ButtonName.text = buttonInfo.ButtonName;
-                    buttonOpenStoreView.Icon.sprite = buttonInfo.ButtonIcon;
+                    buttonSellFoodView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonSellFoodView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+                else if (buttonInfo.ButtonName == "SellWood")
+                {
+                    buttonSellWoodView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonSellWoodView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+                else if(buttonInfo.ButtonName == "SellStone")
+                {
+                    buttonSellStoneView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonSellStoneView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+                else if (buttonInfo.ButtonName == "SellIron")
+                {
+                    buttonSellIronView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonSellIronView.Icon.sprite = buttonInfo.ButtonIcon;
                 }
             }
             
             downPanelView.SetActive(false);
 
-            _storeController = new StoreBuildingController(this, _storeBuildingView, downPanelView, clickHandling, buttonOpenStoreView.Button, _resourcesCount);
+            _storeController = new StoreBuildingController(_storeBuildingView, downPanelView, clickHandling, buttonSellFoodView.Button, buttonSellWoodView.Button, buttonSellStoneView.Button, buttonSellIronView.Button, _resourcesCount);
         }
 
         private async Task CreateBarracks()
@@ -280,11 +307,6 @@ namespace Code.GameServices
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             GameObject uiDownView = Object.Instantiate(prefab);
             return uiDownView;
-        }
-
-        public GameObject CreateUIStoreWindow()
-        {
-            return new GameObject();
         }
 
         public void CreateDefender()

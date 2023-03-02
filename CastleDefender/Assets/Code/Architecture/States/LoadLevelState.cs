@@ -8,15 +8,13 @@ namespace Code.Architecture.States
     {
         private readonly IStatesMachine _statesMachine;
         private readonly SceneLoader _sceneLoader;
-        private readonly IStaticDataService _staticData;
         private readonly IGameFactory _gameFactory;
         private readonly IProgressService _progressService;
 
-        public LoadLevelState(IStatesMachine statesMachine, SceneLoader sceneLoader, IStaticDataService staticData, IGameFactory gameFactory, IProgressService progress)
+        public LoadLevelState(IStatesMachine statesMachine, SceneLoader sceneLoader, IGameFactory gameFactory, IProgressService progress)
         {
             _statesMachine = statesMachine;
             _sceneLoader = sceneLoader;
-            _staticData = staticData;
             _gameFactory = gameFactory;
             _progressService = progress;
         }
@@ -47,6 +45,7 @@ namespace Code.Architecture.States
         private async Task InitGameWorld()
         {
             await _gameFactory.CreateBuildings();
+            await _gameFactory.CreateWallAndTower();
             await _gameFactory.CreateResources();
         }
 

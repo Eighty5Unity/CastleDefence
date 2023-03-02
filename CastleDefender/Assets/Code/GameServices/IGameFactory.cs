@@ -15,6 +15,7 @@ namespace Code.GameServices
         void Cleanup();
         Task CreateUnit(Vector3 at);
         Task CreateBuildings();
+        Task CreateWallAndTower();
         Task CreateResources();
         Task CreateUpUI();
         Task CreateDownUI();

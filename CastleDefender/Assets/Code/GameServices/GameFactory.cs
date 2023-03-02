@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
+using Code.Buildings.WallAndTowerBuildings;
 using Code.GameBalance;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
@@ -20,7 +21,6 @@ namespace Code.GameServices
         public List<ISaveProgress> SaveProgress { get; } = new List<ISaveProgress>();
         public List<ILoadProgress> LoadProgress { get; } = new List<ILoadProgress>();
         
-        private readonly IStaticDataService _staticData;
         private readonly IAssetLoader _assetLoader;
         
         private Transform _canvasUp;
@@ -48,10 +48,18 @@ namespace Code.GameServices
         private StoneBuildingController _stoneBuildingController;
         private IronBuildingView _ironView;
         private IronBuildingController _ironBuildingController;
+        
+        private TowerBuildingView _towerView01;
+        private TowerBuildingView _towerView02;
+        private TowerBuildingView _towerView03;
+        private TowerBuildingView _towerView04;
+        private TowerBuildingController _towerBuildingController01;
+        private TowerBuildingController _towerBuildingController02;
+        private TowerBuildingController _towerBuildingController03;
+        private TowerBuildingController _towerBuildingController04;
 
-        public GameFactory(IStaticDataService staticData, IAssetLoader assetLoader)
+        public GameFactory(IAssetLoader assetLoader)
         {
-            _staticData = staticData;
             _assetLoader = assetLoader;
 
             _resourcesCount = new ResourcesCount();//TODO register save/load
@@ -65,6 +73,9 @@ namespace Code.GameServices
             await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
             await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
             await _assetLoader.Load<GameObject>(AssetAddress.SMITHY);
+            
+            await _assetLoader.Load<GameObject>(AssetAddress.WALL);
+            await _assetLoader.Load<GameObject>(AssetAddress.TOWER);
 
             await _assetLoader.Load<GameObject>(AssetAddress.FOOD);
             await _assetLoader.Load<GameObject>(AssetAddress.WOOD);
@@ -81,6 +92,9 @@ namespace Code.GameServices
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
+            
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WALL);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
             
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
@@ -100,7 +114,7 @@ namespace Code.GameServices
             MoveUnitView moveUnitView = unit.GetComponentInChildren<MoveUnitView>();
             CraftUnitView craftUnitView = unit.GetComponentInChildren<CraftUnitView>();
             
-            MoveUnitController moveUnitController = new MoveUnitController(_staticData, clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView);
+            MoveUnitController moveUnitController = new MoveUnitController(clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView, _foodView, _woodView, _stoneView, _ironView);
 
             TriggerUnitController triggerUnitController = new TriggerUnitController(triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
         }
@@ -121,6 +135,13 @@ namespace Code.GameServices
             await CreateCastle();
             await CreateBarracks();
             await CreateSmithy();
+        }
+
+        public async Task CreateWallAndTower()
+        {
+            await CreateWalls();
+            await CreateTowers();
+            await CreateGate();
         }
 
         public async Task CreateResources()
@@ -288,6 +309,75 @@ namespace Code.GameServices
             downPanelView.SetActive(false);
 
             _smithyController = new SmithyController(downPanelView, clickHandling, _resourcesCount, buttonUpgradeFoodView.Button, buttonUpgradeWoodView.Button, buttonUpgradeStoneView.Button, buttonUpgradeIronView.Button, _craftDevelopment);
+        }
+
+        private async Task CreateWalls()
+        {
+            
+        }
+
+        private async Task CreateTowers()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.TOWER);
+
+            GameObject tower01 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition01, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation01));
+            GameObject tower02 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition02, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation02));
+            GameObject tower03 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition03, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation03));
+            GameObject tower04 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition04, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation04));
+
+            ClickHandling clickHandling01 = tower01.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling02 = tower02.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling03 = tower03.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling04 = tower04.GetComponentInChildren<ClickHandling>();
+
+            _towerView01 = tower01.GetComponent<TowerBuildingView>();
+            _towerView02 = tower02.GetComponent<TowerBuildingView>();
+            _towerView03 = tower03.GetComponent<TowerBuildingView>();
+            _towerView04 = tower04.GetComponent<TowerBuildingView>();
+
+            GameObject downPanelView01 = await CreateUIDownView();
+            GameObject downPanelView02 = await CreateUIDownView();
+            GameObject downPanelView03 = await CreateUIDownView();
+            GameObject downPanelView04 = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
+
+            DownInformationUI infoView01 = downPanelView01.GetComponent<DownInformationUI>();
+            DownInformationUI infoView02 = downPanelView02.GetComponent<DownInformationUI>();
+            DownInformationUI infoView03 = downPanelView03.GetComponent<DownInformationUI>();
+            DownInformationUI infoView04 = downPanelView04.GetComponent<DownInformationUI>();
+
+            infoView01.Icon.sprite = prefabStaticData.Icon;
+            infoView02.Icon.sprite = prefabStaticData.Icon;
+            infoView03.Icon.sprite = prefabStaticData.Icon;
+            infoView04.Icon.sprite = prefabStaticData.Icon;
+            infoView01.Name.text = prefabStaticData.Name;
+            infoView02.Name.text = prefabStaticData.Name;
+            infoView03.Name.text = prefabStaticData.Name;
+            infoView04.Name.text = prefabStaticData.Name;
+            infoView01.Description.text = prefabStaticData.Descriptions;
+            infoView02.Description.text = prefabStaticData.Descriptions;
+            infoView03.Description.text = prefabStaticData.Descriptions;
+            infoView04.Description.text = prefabStaticData.Descriptions;
+
+            downPanelView01.transform.parent = _canvasDown;
+            downPanelView02.transform.parent = _canvasDown;
+            downPanelView03.transform.parent = _canvasDown;
+            downPanelView04.transform.parent = _canvasDown;
+            
+            downPanelView01.SetActive(false);
+            downPanelView02.SetActive(false);
+            downPanelView03.SetActive(false);
+            downPanelView04.SetActive(false);
+
+            _towerBuildingController01 = new TowerBuildingController(downPanelView01, clickHandling01, _towerView01);
+            _towerBuildingController02 = new TowerBuildingController(downPanelView02, clickHandling02, _towerView02);
+            _towerBuildingController03 = new TowerBuildingController(downPanelView03, clickHandling03, _towerView03);
+            _towerBuildingController04 = new TowerBuildingController(downPanelView04, clickHandling04, _towerView04);
+        }
+
+        private async Task CreateGate()
+        {
+            
         }
 
         private async Task CreateFood()

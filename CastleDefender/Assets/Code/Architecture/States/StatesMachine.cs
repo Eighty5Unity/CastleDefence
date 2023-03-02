@@ -24,8 +24,7 @@ namespace Code.Architecture.States
                     services.GetService<ISaveLoadService>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(
                     this, 
-                    sceneLoader, 
-                    services.GetService<IStaticDataService>(), 
+                    sceneLoader,
                     services.GetService<IGameFactory>(), 
                     services.GetService<IProgressService>()),
                 [typeof(GameLoopState)] = new GameLoopState(),

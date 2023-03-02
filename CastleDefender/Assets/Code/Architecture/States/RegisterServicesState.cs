@@ -32,19 +32,11 @@ namespace Code.Architecture.States
 
         private void RegisterServices()
         {
-            RegisteStaticData();
             RegisterAssetLoader();
             RegisterGameProgress();
             RegisterStateMachine();
             RegisterGameFactory();
             RegisterSaveLoad();
-        }
-
-        private void RegisteStaticData()
-        {
-            IStaticDataService staticData = new StaticDataService();
-            staticData.LoadBuildings();
-            _services.RegisterService<IStaticDataService>(staticData);
         }
 
         private void RegisterAssetLoader()
@@ -66,7 +58,7 @@ namespace Code.Architecture.States
 
         private void RegisterGameFactory()
         {
-            IGameFactory gameFactory = new GameFactory(_services.GetService<IStaticDataService>(), _services.GetService<IAssetLoader>());
+            IGameFactory gameFactory = new GameFactory(_services.GetService<IAssetLoader>());
             _services.RegisterService<IGameFactory>(gameFactory);
         }
 

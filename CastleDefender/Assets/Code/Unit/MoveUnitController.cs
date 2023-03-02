@@ -1,9 +1,7 @@
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
-using Code.GameServices;
 using Code.GameServices.InputService;
-using Code.StaticData;
 using UnityEngine;
 
 namespace Code.Unit
@@ -25,18 +23,20 @@ namespace Code.Unit
         private readonly MoveUnitView _moveUnitView;
 
         public MoveUnitController(
-            IStaticDataService staticData, 
             ClickHandling clickHandling, 
             MoveUnitView moveView,
             CastleBuildingView castleView,
             StoreBuildingView storeView,
-            BarracksBuildingView barracksView)
+            BarracksBuildingView barracksView,
+            FoodBuildingView foodView,
+            WoodBuildingView woodView,
+            StoneBuildingView stoneView,
+            IronBuildingView ironView)
         {
-            BuildingPointsStaticData points = staticData.GetBuildingsData();
-            _craftFoodPoint = points.FoodCraftPoint;
-            _craftWoodPoint = points.WoodCraftPoint;
-            _craftStonePoint = points.StoneCraftPoint;
-            _craftIronPoint = points.IronCraftPoint;
+            _craftFoodPoint = foodView.CraftPoint.position;
+            _craftWoodPoint = woodView.CraftPoint.position;
+            _craftStonePoint = stoneView.CraftPoint.position;
+            _craftIronPoint = ironView.CraftPoint.position;
             
             _storePoint = storeView.StorePointPosition.position;
             _barracksPoint = barracksView.SpawnDefenderPoint.position;

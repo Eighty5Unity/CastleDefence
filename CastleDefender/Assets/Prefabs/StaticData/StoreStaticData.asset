@@ -16,5 +16,11 @@ MonoBehaviour:
   Name: Store
   Descriptions: Store descriptions
   Buttons:
-  - ButtonIcon: {fileID: 21300000, guid: de71e893b7ba7477a83cedc635813960, type: 3}
-    ButtonName: OpenStore
+  - ButtonIcon: {fileID: 21300000, guid: bad33ee6cf25d4eecb2244fb098ca53e, type: 3}
+    ButtonName: SellFood
+  - ButtonIcon: {fileID: 21300000, guid: b1e2731a20f564f57aaeda9ff2bd5ee2, type: 3}
+    ButtonName: SellWood
+  - ButtonIcon: {fileID: 21300000, guid: 0fd5734363bba43edb9adf0ae286bf78, type: 3}
+    ButtonName: SellStone
+  - ButtonIcon: {fileID: 21300000, guid: 32378bfc1c50d46129e5e2cafb3c82c4, type: 3}
+    ButtonName: SellIron

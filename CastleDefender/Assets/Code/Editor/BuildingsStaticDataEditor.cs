@@ -22,19 +22,19 @@ namespace Code.Editor
                 buildingPointsData.CastleSpawnPoinUnit = FindObjectOfType<CastleBuildingView>().SpawnUnitPoint.position;
                 buildingPointsData.StorePoint = FindObjectOfType<StoreBuildingView>().StorePointPosition.position;
 
-                var food = FindObjectOfType<FoodBuilding>();
+                var food = FindObjectOfType<FoodBuildingView>();
                 buildingPointsData.FoodType = food.ResourcesType;
                 buildingPointsData.FoodCraftPoint = food.CraftPoint.position;
 
-                var wood = FindObjectOfType<WoodBuilding>();
+                var wood = FindObjectOfType<WoodBuildingView>();
                 buildingPointsData.WoodType = wood.ResourcesType;
                 buildingPointsData.WoodCraftPoint = wood.CraftPoint.position;
 
-                var stone = FindObjectOfType<StoneBuilding>();
+                var stone = FindObjectOfType<StoneBuildingView>();
                 buildingPointsData.StoneType = stone.ResourcesType;
                 buildingPointsData.StoneCraftPoint = stone.CraftPoint.position;
 
-                var iron = FindObjectOfType<IronBuilding>();
+                var iron = FindObjectOfType<IronBuildingView>();
                 buildingPointsData.IronType = iron.ResourcesType;
                 buildingPointsData.IronCraftPoint = iron.CraftPoint.position;
             }

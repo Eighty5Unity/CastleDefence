@@ -73,6 +73,38 @@ MonoBehaviour:
     m_Address: SmithyStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 7e6e0de79efea4bbaba99d46d90d4caf
+    m_Address: Food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a008b690d94224598add1d335d416117
+    m_Address: Iron
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ce3faaebd0cd743749357406a1ca1b9e
+    m_Address: Stone
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c93f470d1fb3a405d8248b340129a6e2
+    m_Address: Wood
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c94e3d25c3e844b1fae08b0e55a944cf
+    m_Address: WoodStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e5cabc2a48bd14a6b9370987bb266a5c
+    m_Address: StoneStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53e88a3ae17934c7889deff139c09c52
+    m_Address: IronStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4db200ddea05d45e68bfb86a1c639cb8
+    m_Address: FoodStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

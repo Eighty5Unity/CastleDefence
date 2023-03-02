@@ -63,17 +63,22 @@
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Code.Unit.MoveUnit" preserve="all" />
+    <type fullname="Code.Buildings.ResourcesBuilgings.CraftResourcesBuilding" preserve="all" />
+    <type fullname="Code.Buildings.ResourcesBuilgings.WoodBuilding" preserve="all" />
+    <type fullname="Code.Buildings.ResourcesBuilgings.StoneBuilding" preserve="all" />
+    <type fullname="Code.Unit.MoveUnitView" preserve="all" />
     <type fullname="Code.GameServices.InputService.ClickHandling" preserve="all" />
     <type fullname="Code.Unit.OnTriggerHandlingUnit" preserve="all" />
+    <type fullname="Code.Buildings.ResourcesBuilgings.FoodBuilding" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.CastleBuildingView" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.StoreBuildingView" preserve="all" />
+    <type fullname="Code.Buildings.ResourcesBuilgings.IronBuilding" preserve="all" />
     <type fullname="Code.UI.ResourcesUICount" preserve="all" />
-    <type fullname="Code.Unit.CraftUnit.CraftResourcesUnit" preserve="all" />
     <type fullname="Code.UI.DownInformationUI" preserve="all" />
     <type fullname="Code.StaticData.DownInformationStaticData" preserve="all" />
     <type fullname="Code.UI.DownUIButtonView" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.BarracksBuildingView" preserve="all" />
+    <type fullname="Code.Unit.CraftUnit.CraftUnitView" preserve="all" />
     <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
+using Code.Buildings.ResourcesBuilgings;
 using Code.GameBalance;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
@@ -38,6 +39,15 @@ namespace Code.GameServices
         
         private readonly ResourcesCount _resourcesCount;
         private readonly CraftDevelopment _craftDevelopment;
+        
+        private FoodBuildingView _foodView;
+        private FoodBuildingController _foodBuildingController;
+        private WoodBuildingView _woodView;
+        private WoodBuildingController _woodBuildingController;
+        private StoneBuildingView _stoneView;
+        private StoneBuildingController _stoneBuildingController;
+        private IronBuildingView _ironView;
+        private IronBuildingController _ironBuildingController;
 
         public GameFactory(IStaticDataService staticData, IAssetLoader assetLoader)
         {
@@ -55,6 +65,11 @@ namespace Code.GameServices
             await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
             await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
             await _assetLoader.Load<GameObject>(AssetAddress.SMITHY);
+
+            await _assetLoader.Load<GameObject>(AssetAddress.FOOD);
+            await _assetLoader.Load<GameObject>(AssetAddress.WOOD);
+            await _assetLoader.Load<GameObject>(AssetAddress.STONE);
+            await _assetLoader.Load<GameObject>(AssetAddress.IRON);
             
             await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CANVAS);
             await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CANVAS);
@@ -66,6 +81,11 @@ namespace Code.GameServices
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
             await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
+            
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
+            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
         }
 
         public async Task CreateUnit(Vector3 at)
@@ -77,11 +97,22 @@ namespace Code.GameServices
             ClickHandling clickHandling = unit.GetComponentInChildren<ClickHandling>();
             OnTriggerHandlingUnit triggerHandling = unit.GetComponentInChildren<OnTriggerHandlingUnit>();
 
-            MoveUnit move = unit.GetComponentInChildren<MoveUnit>();
-            move.Counstructor(_staticData, clickHandling);
+            MoveUnitView moveUnitView = unit.GetComponentInChildren<MoveUnitView>();
+            CraftUnitView craftUnitView = unit.GetComponentInChildren<CraftUnitView>();
+            
+            MoveUnitController moveUnitController = new MoveUnitController(_staticData, clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView);
 
-            CraftResourcesUnit craftResources = unit.GetComponentInChildren<CraftResourcesUnit>();
-            craftResources.Constructor(triggerHandling, move, _craftDevelopment);
+            TriggerUnitController triggerUnitController = new TriggerUnitController(triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
+        }
+
+        public void CreateDefender()
+        {
+            Debug.Log("Create Defender");
+        }
+
+        public void CreateEnemy()
+        {
+            
         }
 
         public async Task CreateBuildings()
@@ -90,6 +121,14 @@ namespace Code.GameServices
             await CreateCastle();
             await CreateBarracks();
             await CreateSmithy();
+        }
+
+        public async Task CreateResources()
+        {
+            await CreateFood();
+            await CreateWood();
+            await CreateStone();
+            await CreateIron();
         }
 
         private async Task CreateCastle()
@@ -106,10 +145,8 @@ namespace Code.GameServices
             infoView.Name.text = prefabStaticData.Name;
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
-
-            GameObject buttonCreateUnitPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonCreateUnit = Object.Instantiate(buttonCreateUnitPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonCreateUnitView = buttonCreateUnit.GetComponent<DownUIButtonView>();
+            
+            DownUIButtonView buttonCreateUnitView = await CreateButtonView(infoView);
             
             foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
             {
@@ -140,21 +177,10 @@ namespace Code.GameServices
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
             
-            GameObject buttonSellFoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonSellFood = Object.Instantiate(buttonSellFoodPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonSellFoodView = buttonSellFood.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonSellWoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonSellWood = Object.Instantiate(buttonSellWoodPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonSellWoodView = buttonSellWood.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonSellStonePrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonSellStone = Object.Instantiate(buttonSellStonePrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonSellStoneView = buttonSellStone.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonSellIronPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonSellIron = Object.Instantiate(buttonSellIronPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonSellIronView = buttonSellIron.GetComponent<DownUIButtonView>();
+            DownUIButtonView buttonSellFoodView = await CreateButtonView(infoView);
+            DownUIButtonView buttonSellWoodView = await CreateButtonView(infoView);
+            DownUIButtonView buttonSellStoneView = await CreateButtonView(infoView);
+            DownUIButtonView buttonSellIronView = await CreateButtonView(infoView);
 
             foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
             {
@@ -199,10 +225,8 @@ namespace Code.GameServices
             infoView.Name.text = prefabStaticData.Name;
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
-
-            GameObject buttonCreateDefenderPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonCreateDefender = Object.Instantiate(buttonCreateDefenderPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonCreateDefenderView = buttonCreateDefender.GetComponent<DownUIButtonView>();
+            
+            DownUIButtonView buttonCreateDefenderView = await CreateButtonView(infoView);
 
             foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
             {
@@ -232,21 +256,10 @@ namespace Code.GameServices
             infoView.Description.text = prefabStaticData.Descriptions;
             downPanelView.transform.parent = _canvasDown;
 
-            GameObject buttonUpgradeFoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonUpgradeFood = Object.Instantiate(buttonUpgradeFoodPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonUpgradeFoodView = buttonUpgradeFood.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonUpgradeWoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonUpgradeWood = Object.Instantiate(buttonUpgradeWoodPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonUpgradeWoodView = buttonUpgradeWood.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonUpgradeStonePrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonUpgradeStone = Object.Instantiate(buttonUpgradeStonePrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonUpgradeStoneView = buttonUpgradeStone.GetComponent<DownUIButtonView>();
-            
-            GameObject buttonUpgradeIronPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
-            GameObject buttonUpgradeIron = Object.Instantiate(buttonUpgradeIronPrefab, infoView.ButtonsPosition);
-            DownUIButtonView buttonUpgradeIronView = buttonUpgradeIron.GetComponent<DownUIButtonView>();
+            DownUIButtonView buttonUpgradeFoodView = await CreateButtonView(infoView);
+            DownUIButtonView buttonUpgradeWoodView = await CreateButtonView(infoView);
+            DownUIButtonView buttonUpgradeStoneView = await CreateButtonView(infoView);
+            DownUIButtonView buttonUpgradeIronView = await CreateButtonView(infoView);
 
             foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
             {
@@ -275,6 +288,94 @@ namespace Code.GameServices
             downPanelView.SetActive(false);
 
             _smithyController = new SmithyController(downPanelView, clickHandling, _resourcesCount, buttonUpgradeFoodView.Button, buttonUpgradeWoodView.Button, buttonUpgradeStoneView.Button, buttonUpgradeIronView.Button, _craftDevelopment);
+        }
+
+        private async Task CreateFood()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.FOOD);
+            GameObject food = Object.Instantiate(prefab, BuildingsPositionInWorld.FoodPosition, Quaternion.identity);
+            ClickHandling clickHandling = food.GetComponentInChildren<ClickHandling>();
+            _foodView = food.GetComponent<FoodBuildingView>();
+
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            downPanelView.SetActive(false);
+
+            _foodBuildingController = new FoodBuildingController(downPanelView, clickHandling, _foodView);
+        }
+
+        private async Task CreateWood()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.WOOD);
+            GameObject wood = Object.Instantiate(prefab, BuildingsPositionInWorld.WoodPosition, Quaternion.identity);
+            ClickHandling clickHandling = wood.GetComponentInChildren<ClickHandling>();
+            _woodView = wood.GetComponent<WoodBuildingView>();
+            
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            downPanelView.SetActive(false);
+
+            _woodBuildingController = new WoodBuildingController(downPanelView, clickHandling, _woodView);
+        }
+
+        private async Task CreateStone()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.STONE);
+            GameObject stone = Object.Instantiate(prefab, BuildingsPositionInWorld.StonePosition, Quaternion.identity);
+            ClickHandling clickHandling = stone.GetComponentInChildren<ClickHandling>();
+            _stoneView = stone.GetComponent<StoneBuildingView>();
+            
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            downPanelView.SetActive(false);
+
+            _stoneBuildingController = new StoneBuildingController(downPanelView, clickHandling, _stoneView);
+        }
+
+        private async Task CreateIron()
+        {
+            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.IRON);
+            GameObject iron = Object.Instantiate(prefab, BuildingsPositionInWorld.IronPosition, Quaternion.identity);
+            ClickHandling clickHandling = iron.GetComponentInChildren<ClickHandling>();
+            _ironView = iron.GetComponent<IronBuildingView>();
+            
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+
+            downPanelView.SetActive(false);
+
+            _ironBuildingController = new IronBuildingController(downPanelView, clickHandling, _ironView);
+        }
+
+        private async Task<DownUIButtonView> CreateButtonView(DownInformationUI infoView)
+        {
+            GameObject buttonUpgradeFoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonUpgradeFood = Object.Instantiate(buttonUpgradeFoodPrefab, infoView.ButtonsPosition);
+            DownUIButtonView buttonUpgradeFoodView = buttonUpgradeFood.GetComponent<DownUIButtonView>();
+            return buttonUpgradeFoodView;
         }
 
         public async Task CreateUpUI()
@@ -307,16 +408,6 @@ namespace Code.GameServices
             GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             GameObject uiDownView = Object.Instantiate(prefab);
             return uiDownView;
-        }
-
-        public void CreateDefender()
-        {
-            Debug.Log("Create Defender");
-        }
-
-        public void CreateEnemy()
-        {
-            
         }
 
         public void Cleanup()

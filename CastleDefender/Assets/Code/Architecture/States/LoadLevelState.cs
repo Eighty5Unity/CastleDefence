@@ -47,6 +47,7 @@ namespace Code.Architecture.States
         private async Task InitGameWorld()
         {
             await _gameFactory.CreateBuildings();
+            await _gameFactory.CreateResources();
         }
 
         private void InformProgressLoaders()

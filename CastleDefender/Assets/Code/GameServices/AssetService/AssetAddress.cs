@@ -16,6 +16,15 @@ namespace Code.GameServices.AssetService
         public const string SMITHY = "Smithy";
         public const string STATIC_DATA_SMITHY = "SmithyStaticData";
 
+        public const string FOOD = "Food";
+        public const string STATIC_DATA_FOOD = "FoodStaticData";
+        public const string WOOD = "Wood";
+        public const string STATIC_DATA_WOOD = "WoodStaticData";
+        public const string STONE = "Stone";
+        public const string STATIC_DATA_STONE = "StoneStaticData";
+        public const string IRON = "Iron";
+        public const string STATIC_DATA_IRON = "IronStaticData";
+
         public const string UI_UP_CANVAS = "CanvasUp";
         public const string UI_DOWN_CANVAS = "CanvasDown";
         public const string UI_UP_CONTAINER = "UpContainer";

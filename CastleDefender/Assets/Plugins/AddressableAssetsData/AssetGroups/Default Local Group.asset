@@ -121,6 +121,14 @@ MonoBehaviour:
     m_Address: TowerStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bd526ebc0e352403d8b0c66f0c8e9b85
+    m_Address: Gate
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7cb311b6e93644ff784b7e7ebf77c7ed
+    m_Address: GateStaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

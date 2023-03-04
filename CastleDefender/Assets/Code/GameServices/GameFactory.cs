@@ -57,6 +57,32 @@ namespace Code.GameServices
         private TowerBuildingController _towerBuildingController02;
         private TowerBuildingController _towerBuildingController03;
         private TowerBuildingController _towerBuildingController04;
+        
+        private WallBuildingView _wallView01;
+        private WallBuildingView _wallView02;
+        private WallBuildingView _wallView03;
+        private WallBuildingView _wallView04;
+        private WallBuildingView _wallView05;
+        private WallBuildingView _wallView06;
+        private WallBuildingView _wallView07;
+        private WallBuildingView _wallView08;
+        private WallBuildingView _wallView09;
+        private WallBuildingView _wallView10;
+        private WallBuildingView _wallView11;
+        private WallBuildingController _wallBuildingController01;
+        private WallBuildingController _wallBuildingController02;
+        private WallBuildingController _wallBuildingController03;
+        private WallBuildingController _wallBuildingController04;
+        private WallBuildingController _wallBuildingController05;
+        private WallBuildingController _wallBuildingController06;
+        private WallBuildingController _wallBuildingController07;
+        private WallBuildingController _wallBuildingController08;
+        private WallBuildingController _wallBuildingController09;
+        private WallBuildingController _wallBuildingController10;
+        private WallBuildingController _wallBuildingController11;
+        
+        private GateBuildingView _gateView;
+        private GateBuildingController _gateBuildingController;
 
         public GameFactory(IAssetLoader assetLoader)
         {
@@ -68,43 +94,46 @@ namespace Code.GameServices
 
         public async Task LoadAddressableAssets()
         {
-            await _assetLoader.Load<GameObject>(AssetAddress.UNIT);
-            await _assetLoader.Load<GameObject>(AssetAddress.STORE);
-            await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
-            await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
-            await _assetLoader.Load<GameObject>(AssetAddress.SMITHY);
+            await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
             
-            await _assetLoader.Load<GameObject>(AssetAddress.WALL);
-            await _assetLoader.Load<GameObject>(AssetAddress.TOWER);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.CASTLE);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.BARRACKS);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.SMITHY);
+            
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WALL);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.TOWER);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.GATE);
 
-            await _assetLoader.Load<GameObject>(AssetAddress.FOOD);
-            await _assetLoader.Load<GameObject>(AssetAddress.WOOD);
-            await _assetLoader.Load<GameObject>(AssetAddress.STONE);
-            await _assetLoader.Load<GameObject>(AssetAddress.IRON);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.FOOD);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WOOD);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STONE);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.IRON);
             
-            await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CANVAS);
-            await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CANVAS);
-            await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CONTAINER);
-            await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
-            await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CANVAS);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CANVAS);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CONTAINER);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_BUTTON);
 
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
             
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WALL);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_WALL);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_GATE);
             
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
-            await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
+            await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
         }
 
         public async Task CreateUnit(Vector3 at)
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UNIT);
+            GameObject prefab = await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
             GameObject unit = Object.Instantiate(prefab, at, Quaternion.identity);
             RegisterProgress(unit);
 
@@ -114,7 +143,7 @@ namespace Code.GameServices
             MoveUnitView moveUnitView = unit.GetComponentInChildren<MoveUnitView>();
             CraftUnitView craftUnitView = unit.GetComponentInChildren<CraftUnitView>();
             
-            MoveUnitController moveUnitController = new MoveUnitController(clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView, _foodView, _woodView, _stoneView, _ironView);
+            MoveUnitController moveUnitController = new MoveUnitController(clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView, _foodView, _woodView, _stoneView, _ironView, _gateBuildingController);
 
             TriggerUnitController triggerUnitController = new TriggerUnitController(triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
         }
@@ -154,13 +183,13 @@ namespace Code.GameServices
 
         private async Task CreateCastle()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.CASTLE);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.CASTLE);
             GameObject castle = Object.Instantiate(prefab, BuildingsPositionInWorld.CastlePosition, Quaternion.identity);
             _castleBuildingView = castle.GetComponent<CastleBuildingView>();
             ClickHandling clickHandling = castle.GetComponentInChildren<ClickHandling>();
 
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -185,13 +214,13 @@ namespace Code.GameServices
 
         private async Task CreateStore()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.STORE);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, BuildingsPositionInWorld.StorePosition, Quaternion.identity);
             _storeBuildingView = store.GetComponent<StoreBuildingView>();
             ClickHandling clickHandling = store.GetComponentInChildren<ClickHandling>();
 
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -234,13 +263,13 @@ namespace Code.GameServices
 
         private async Task CreateBarracks()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.BARRACKS);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.BARRACKS);
             GameObject barracks = Object.Instantiate(prefab, BuildingsPositionInWorld.BarracksPosition, Quaternion.identity);
             _barracksBuildingView = barracks.GetComponent<BarracksBuildingView>();
             ClickHandling clickHandling = barracks.GetComponentInChildren<ClickHandling>();
 
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_BARRACKS);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -265,12 +294,12 @@ namespace Code.GameServices
 
         private async Task CreateSmithy()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.SMITHY);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.SMITHY);
             GameObject smithy = Object.Instantiate(prefab, BuildingsPositionInWorld.SmithyPosition, Quaternion.identity);
             ClickHandling clickHandling = smithy.GetComponentInChildren<ClickHandling>();
 
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_SMITHY);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -313,12 +342,143 @@ namespace Code.GameServices
 
         private async Task CreateWalls()
         {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WALL);
+
+            GameObject wall01 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition01, Quaternion.Euler(BuildingsPositionInWorld.WallRotation01));
+            GameObject wall02 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition02, Quaternion.Euler(BuildingsPositionInWorld.WallRotation02));
+            GameObject wall03 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition03, Quaternion.Euler(BuildingsPositionInWorld.WallRotation03));
+            GameObject wall04 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition04, Quaternion.Euler(BuildingsPositionInWorld.WallRotation04));
+            GameObject wall05 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition05, Quaternion.Euler(BuildingsPositionInWorld.WallRotation05));
+            GameObject wall06 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition06, Quaternion.Euler(BuildingsPositionInWorld.WallRotation06));
+            GameObject wall07 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition07, Quaternion.Euler(BuildingsPositionInWorld.WallRotation07));
+            GameObject wall08 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition08, Quaternion.Euler(BuildingsPositionInWorld.WallRotation08));
+            GameObject wall09 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition09, Quaternion.Euler(BuildingsPositionInWorld.WallRotation09));
+            GameObject wall10 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition10, Quaternion.Euler(BuildingsPositionInWorld.WallRotation10));
+            GameObject wall11 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition11, Quaternion.Euler(BuildingsPositionInWorld.WallRotation11));
+
+            ClickHandling clickHandling01 = wall01.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling02 = wall02.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling03 = wall03.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling04 = wall04.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling05 = wall05.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling06 = wall06.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling07 = wall07.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling08 = wall08.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling09 = wall09.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling10 = wall10.GetComponentInChildren<ClickHandling>();
+            ClickHandling clickHandling11 = wall11.GetComponentInChildren<ClickHandling>();
+
+            _wallView01 = wall01.GetComponent<WallBuildingView>();
+            _wallView02 = wall02.GetComponent<WallBuildingView>();
+            _wallView03 = wall03.GetComponent<WallBuildingView>();
+            _wallView04 = wall04.GetComponent<WallBuildingView>();
+            _wallView05 = wall05.GetComponent<WallBuildingView>();
+            _wallView06 = wall06.GetComponent<WallBuildingView>();
+            _wallView07 = wall07.GetComponent<WallBuildingView>();
+            _wallView08 = wall08.GetComponent<WallBuildingView>();
+            _wallView09 = wall09.GetComponent<WallBuildingView>();
+            _wallView10 = wall10.GetComponent<WallBuildingView>();
+            _wallView11 = wall11.GetComponent<WallBuildingView>();
+
+            GameObject downPanelView01 = await CreateUIDownView();
+            GameObject downPanelView02 = await CreateUIDownView();
+            GameObject downPanelView03 = await CreateUIDownView();
+            GameObject downPanelView04 = await CreateUIDownView();
+            GameObject downPanelView05 = await CreateUIDownView();
+            GameObject downPanelView06 = await CreateUIDownView();
+            GameObject downPanelView07 = await CreateUIDownView();
+            GameObject downPanelView08 = await CreateUIDownView();
+            GameObject downPanelView09 = await CreateUIDownView();
+            GameObject downPanelView10 = await CreateUIDownView();
+            GameObject downPanelView11 = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_WALL);
+
+            DownInformationUI infoView01 = downPanelView01.GetComponent<DownInformationUI>();
+            DownInformationUI infoView02 = downPanelView02.GetComponent<DownInformationUI>();
+            DownInformationUI infoView03 = downPanelView03.GetComponent<DownInformationUI>();
+            DownInformationUI infoView04 = downPanelView04.GetComponent<DownInformationUI>();
+            DownInformationUI infoView05 = downPanelView05.GetComponent<DownInformationUI>();
+            DownInformationUI infoView06 = downPanelView06.GetComponent<DownInformationUI>();
+            DownInformationUI infoView07 = downPanelView07.GetComponent<DownInformationUI>();
+            DownInformationUI infoView08 = downPanelView08.GetComponent<DownInformationUI>();
+            DownInformationUI infoView09 = downPanelView09.GetComponent<DownInformationUI>();
+            DownInformationUI infoView10 = downPanelView10.GetComponent<DownInformationUI>();
+            DownInformationUI infoView11 = downPanelView11.GetComponent<DownInformationUI>();
+
+            infoView01.Icon.sprite = prefabStaticData.Icon;
+            infoView02.Icon.sprite = prefabStaticData.Icon;
+            infoView03.Icon.sprite = prefabStaticData.Icon;
+            infoView04.Icon.sprite = prefabStaticData.Icon;
+            infoView05.Icon.sprite = prefabStaticData.Icon;
+            infoView06.Icon.sprite = prefabStaticData.Icon;
+            infoView07.Icon.sprite = prefabStaticData.Icon;
+            infoView08.Icon.sprite = prefabStaticData.Icon;
+            infoView09.Icon.sprite = prefabStaticData.Icon;
+            infoView10.Icon.sprite = prefabStaticData.Icon;
+            infoView11.Icon.sprite = prefabStaticData.Icon;
+            infoView01.Name.text = prefabStaticData.Name;
+            infoView02.Name.text = prefabStaticData.Name;
+            infoView03.Name.text = prefabStaticData.Name;
+            infoView04.Name.text = prefabStaticData.Name;
+            infoView05.Name.text = prefabStaticData.Name;
+            infoView06.Name.text = prefabStaticData.Name;
+            infoView07.Name.text = prefabStaticData.Name;
+            infoView08.Name.text = prefabStaticData.Name;
+            infoView09.Name.text = prefabStaticData.Name;
+            infoView10.Name.text = prefabStaticData.Name;
+            infoView11.Name.text = prefabStaticData.Name;
+            infoView01.Description.text = prefabStaticData.Descriptions;
+            infoView02.Description.text = prefabStaticData.Descriptions;
+            infoView03.Description.text = prefabStaticData.Descriptions;
+            infoView04.Description.text = prefabStaticData.Descriptions;
+            infoView05.Description.text = prefabStaticData.Descriptions;
+            infoView06.Description.text = prefabStaticData.Descriptions;
+            infoView07.Description.text = prefabStaticData.Descriptions;
+            infoView08.Description.text = prefabStaticData.Descriptions;
+            infoView09.Description.text = prefabStaticData.Descriptions;
+            infoView10.Description.text = prefabStaticData.Descriptions;
+            infoView11.Description.text = prefabStaticData.Descriptions;
+
+            downPanelView01.transform.parent = _canvasDown;
+            downPanelView02.transform.parent = _canvasDown;
+            downPanelView03.transform.parent = _canvasDown;
+            downPanelView04.transform.parent = _canvasDown;
+            downPanelView05.transform.parent = _canvasDown;
+            downPanelView06.transform.parent = _canvasDown;
+            downPanelView07.transform.parent = _canvasDown;
+            downPanelView08.transform.parent = _canvasDown;
+            downPanelView09.transform.parent = _canvasDown;
+            downPanelView10.transform.parent = _canvasDown;
+            downPanelView11.transform.parent = _canvasDown;
             
+            downPanelView01.SetActive(false);
+            downPanelView02.SetActive(false);
+            downPanelView03.SetActive(false);
+            downPanelView04.SetActive(false);
+            downPanelView05.SetActive(false);
+            downPanelView06.SetActive(false);
+            downPanelView07.SetActive(false);
+            downPanelView08.SetActive(false);
+            downPanelView09.SetActive(false);
+            downPanelView10.SetActive(false);
+            downPanelView11.SetActive(false);
+
+            _wallBuildingController01 = new WallBuildingController(downPanelView01, clickHandling01, _wallView01);
+            _wallBuildingController02 = new WallBuildingController(downPanelView02, clickHandling02, _wallView02);
+            _wallBuildingController03 = new WallBuildingController(downPanelView03, clickHandling03, _wallView03);
+            _wallBuildingController04 = new WallBuildingController(downPanelView04, clickHandling04, _wallView04);
+            _wallBuildingController05 = new WallBuildingController(downPanelView05, clickHandling05, _wallView05);
+            _wallBuildingController06 = new WallBuildingController(downPanelView06, clickHandling06, _wallView06);
+            _wallBuildingController07 = new WallBuildingController(downPanelView07, clickHandling07, _wallView07);
+            _wallBuildingController08 = new WallBuildingController(downPanelView08, clickHandling08, _wallView08);
+            _wallBuildingController09 = new WallBuildingController(downPanelView09, clickHandling09, _wallView09);
+            _wallBuildingController10 = new WallBuildingController(downPanelView10, clickHandling10, _wallView10);
+            _wallBuildingController11 = new WallBuildingController(downPanelView11, clickHandling11, _wallView11);
         }
 
         private async Task CreateTowers()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.TOWER);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.TOWER);
 
             GameObject tower01 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition01, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation01));
             GameObject tower02 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition02, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation02));
@@ -339,7 +499,7 @@ namespace Code.GameServices
             GameObject downPanelView02 = await CreateUIDownView();
             GameObject downPanelView03 = await CreateUIDownView();
             GameObject downPanelView04 = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_TOWER);
 
             DownInformationUI infoView01 = downPanelView01.GetComponent<DownInformationUI>();
             DownInformationUI infoView02 = downPanelView02.GetComponent<DownInformationUI>();
@@ -377,18 +537,44 @@ namespace Code.GameServices
 
         private async Task CreateGate()
         {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.GATE);
+            GameObject gate = Object.Instantiate(prefab, BuildingsPositionInWorld.GatePosition, Quaternion.Euler(BuildingsPositionInWorld.GateRotation));
+            ClickHandling clickHandling = gate.GetComponentInChildren<ClickHandling>();
+            _gateView = gate.GetComponent<GateBuildingView>();
+            Animation openCloseAnimation = gate.GetComponentInChildren<Animation>();
             
+            GameObject downPanelView = await CreateUIDownView();
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_GATE);
+            DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
+            infoView.Icon.sprite = prefabStaticData.Icon;
+            infoView.Name.text = prefabStaticData.Name;
+            infoView.Description.text = prefabStaticData.Descriptions;
+            downPanelView.transform.parent = _canvasDown;
+            
+            DownUIButtonView buttonOpenCloseView = await CreateButtonView(infoView);
+            foreach (UIButtonInfo buttonInfo in prefabStaticData.Buttons)
+            {
+                if (buttonInfo.ButtonName == "OpenClose")
+                {
+                    buttonOpenCloseView.ButtonName.text = buttonInfo.ButtonName;
+                    buttonOpenCloseView.Icon.sprite = buttonInfo.ButtonIcon;
+                }
+            }
+
+            downPanelView.SetActive(false);
+
+            _gateBuildingController = new GateBuildingController(downPanelView, clickHandling, _gateView, buttonOpenCloseView.Button, openCloseAnimation);
         }
 
         private async Task CreateFood()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.FOOD);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.FOOD);
             GameObject food = Object.Instantiate(prefab, BuildingsPositionInWorld.FoodPosition, Quaternion.identity);
             ClickHandling clickHandling = food.GetComponentInChildren<ClickHandling>();
             _foodView = food.GetComponent<FoodBuildingView>();
 
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_FOOD);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -402,13 +588,13 @@ namespace Code.GameServices
 
         private async Task CreateWood()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.WOOD);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WOOD);
             GameObject wood = Object.Instantiate(prefab, BuildingsPositionInWorld.WoodPosition, Quaternion.identity);
             ClickHandling clickHandling = wood.GetComponentInChildren<ClickHandling>();
             _woodView = wood.GetComponent<WoodBuildingView>();
             
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -422,13 +608,13 @@ namespace Code.GameServices
 
         private async Task CreateStone()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.STONE);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STONE);
             GameObject stone = Object.Instantiate(prefab, BuildingsPositionInWorld.StonePosition, Quaternion.identity);
             ClickHandling clickHandling = stone.GetComponentInChildren<ClickHandling>();
             _stoneView = stone.GetComponent<StoneBuildingView>();
             
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -442,13 +628,13 @@ namespace Code.GameServices
 
         private async Task CreateIron()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.IRON);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.IRON);
             GameObject iron = Object.Instantiate(prefab, BuildingsPositionInWorld.IronPosition, Quaternion.identity);
             ClickHandling clickHandling = iron.GetComponentInChildren<ClickHandling>();
             _ironView = iron.GetComponent<IronBuildingView>();
             
             GameObject downPanelView = await CreateUIDownView();
-            DownInformationStaticData prefabStaticData = await _assetLoader.Load<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
+            DownInformationStaticData prefabStaticData = await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
             DownInformationUI infoView = downPanelView.GetComponent<DownInformationUI>();
             infoView.Icon.sprite = prefabStaticData.Icon;
             infoView.Name.text = prefabStaticData.Name;
@@ -462,7 +648,7 @@ namespace Code.GameServices
 
         private async Task<DownUIButtonView> CreateButtonView(DownInformationUI infoView)
         {
-            GameObject buttonUpgradeFoodPrefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            GameObject buttonUpgradeFoodPrefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_BUTTON);
             GameObject buttonUpgradeFood = Object.Instantiate(buttonUpgradeFoodPrefab, infoView.ButtonsPosition);
             DownUIButtonView buttonUpgradeFoodView = buttonUpgradeFood.GetComponent<DownUIButtonView>();
             return buttonUpgradeFoodView;
@@ -470,21 +656,21 @@ namespace Code.GameServices
 
         public async Task CreateUpUI()
         {
-            GameObject prefabUp = await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CANVAS);
+            GameObject prefabUp = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CANVAS);
             GameObject canvasUp = Object.Instantiate(prefabUp);
             _canvasUp = canvasUp.transform;
         }
 
         public async Task CreateDownUI()
         {
-            GameObject prefabDown = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CANVAS);
+            GameObject prefabDown = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CANVAS);
             GameObject canvasDown = Object.Instantiate(prefabDown);
             _canvasDown = canvasDown.transform;
         }
 
         public async void CreateUIResourcesView()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_UP_CONTAINER);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CONTAINER);
             GameObject uiResourcesView = Object.Instantiate(prefab, _canvasUp);
             RegisterProgress(uiResourcesView);
 
@@ -495,14 +681,20 @@ namespace Code.GameServices
 
         public async Task<GameObject> CreateUIDownView()
         {
-            GameObject prefab = await _assetLoader.Load<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             GameObject uiDownView = Object.Instantiate(prefab);
             return uiDownView;
         }
 
+        public void CleanupBuildings()
+        {
+            _assetLoader.CleanupBuildings();
+        }
+
         public void Cleanup()
         {
-            _assetLoader.Cleanup();
+            _assetLoader.CleanupBuildings();
+            _assetLoader.CleanupUnits();
         }
 
         private void RegisterProgress(GameObject gameObject)

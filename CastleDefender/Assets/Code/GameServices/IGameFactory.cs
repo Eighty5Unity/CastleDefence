@@ -13,6 +13,7 @@ namespace Code.GameServices
         void CreateEnemy();
         Task LoadAddressableAssets();
         void Cleanup();
+        void CleanupBuildings();
         Task CreateUnit(Vector3 at);
         Task CreateBuildings();
         Task CreateWallAndTower();

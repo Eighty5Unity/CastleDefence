@@ -21,6 +21,9 @@ namespace Code.GameServices.AssetService
         public const string TOWER = "Tower";
         public const string STATIC_DATA_TOWER = "TowerStaticData";
         
+        public const string GATE = "Gate";
+        public const string STATIC_DATA_GATE = "GateStaticData";
+        
 
         public const string FOOD = "Food";
         public const string STATIC_DATA_FOOD = "FoodStaticData";

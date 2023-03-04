@@ -28,6 +28,10 @@
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
     <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.AnimationClip" preserve="all" />
+    <type fullname="UnityEngine.Animation" preserve="all" />
+  </assembly>
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
     <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
@@ -79,6 +83,9 @@
     <type fullname="Code.UI.DownUIButtonView" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.BarracksBuildingView" preserve="all" />
     <type fullname="Code.Unit.CraftUnit.CraftUnitView" preserve="all" />
+    <type fullname="Code.Buildings.WallAndTowerBuildings.WallBuildingView" preserve="all" />
+    <type fullname="Code.Buildings.WallAndTowerBuildings.TowerBuildingView" preserve="all" />
+    <type fullname="Code.Buildings.WallAndTowerBuildings.GateBuildingView" preserve="all" />
     <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

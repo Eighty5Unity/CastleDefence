@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c7c6ef404b427eb2c5fd75b947f3b2, type: 3}
+  m_Name: GateStaticData
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 1491b0c6b5d8c4447bb64c7386e83b75, type: 3}
+  Name: Gate
+  Descriptions: Gate open and close
+  Buttons:
+  - ButtonIcon: {fileID: 21300000, guid: 1491b0c6b5d8c4447bb64c7386e83b75, type: 3}
+    ButtonName: OpenClose

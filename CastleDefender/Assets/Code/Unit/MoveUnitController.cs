@@ -1,6 +1,8 @@
+using System;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
+using Code.Buildings.WallAndTowerBuildings;
 using Code.GameServices.InputService;
 using UnityEngine;
 
@@ -21,6 +23,8 @@ namespace Code.Unit
 
         private readonly ClickHandling _clickHandling;
         private readonly MoveUnitView _moveUnitView;
+        private readonly GateBuildingController _gateController;
+        private bool _isGateOpen;
 
         public MoveUnitController(
             ClickHandling clickHandling, 
@@ -31,7 +35,8 @@ namespace Code.Unit
             FoodBuildingView foodView,
             WoodBuildingView woodView,
             StoneBuildingView stoneView,
-            IronBuildingView ironView)
+            IronBuildingView ironView,
+            GateBuildingController gateController)
         {
             _craftFoodPoint = foodView.CraftPoint.position;
             _craftWoodPoint = woodView.CraftPoint.position;
@@ -45,9 +50,17 @@ namespace Code.Unit
             _clickHandling = clickHandling;
             _clickHandling.MoveHappend += ChooseBuildingToMove;
 
+            _gateController = gateController;
+            _gateController.GateOpen += GateOpen;
+
             _moveUnitView = moveView;
         }
-        
+
+        private void GateOpen(bool result)
+        {
+            _isGateOpen = result;
+        }
+
         private void ChooseBuildingToMove(ClickHandling building)
         {
             switch (building.BuildingType)

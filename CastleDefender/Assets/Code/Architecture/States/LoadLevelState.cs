@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Code.GameServices;
 using Code.GameServices.SaveLoadProgress;
+using UnityEngine;
 
 namespace Code.Architecture.States
 {
@@ -64,7 +65,7 @@ namespace Code.Architecture.States
 
         public void ExitState()
         {
-            
+            _gameFactory.CleanupBuildings();
         }
     }
 }

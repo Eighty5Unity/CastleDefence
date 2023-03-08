@@ -1,4 +1,3 @@
-using System;
 using Code.Buildings;
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
@@ -58,7 +57,14 @@ namespace Code.Unit
 
         private void GateOpen(bool result)
         {
-            _isGateOpen = result;
+            if (result)
+            {
+                _moveUnitView.Resume();
+            }
+            else if (!result)
+            {
+                _moveUnitView.Stop();
+            }
         }
 
         private void ChooseBuildingToMove(ClickHandling building)

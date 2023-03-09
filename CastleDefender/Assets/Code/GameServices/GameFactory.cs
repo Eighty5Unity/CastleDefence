@@ -213,6 +213,8 @@ namespace Code.GameServices
         }
 
         private async Task CreateStore()
+        
+        
         {
             GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, BuildingsPositionInWorld.StorePosition, Quaternion.identity);
@@ -342,6 +344,8 @@ namespace Code.GameServices
 
         private async Task CreateWalls()
         {
+            //TODO Refactoring!
+            
             GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WALL);
 
             GameObject wall01 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition01, Quaternion.Euler(BuildingsPositionInWorld.WallRotation01));
@@ -478,6 +482,8 @@ namespace Code.GameServices
 
         private async Task CreateTowers()
         {
+            //TODO Refactoring!
+            
             GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.TOWER);
 
             GameObject tower01 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition01, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation01));

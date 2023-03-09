@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Unit;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Code.GameServices.Pool
 {
@@ -44,7 +45,12 @@ namespace Code.GameServices.Pool
 
         public void Dispose()
         {
-            Debug.Log("ObjectPool Dispose");
+            for (var i = 0; i < _stack.Count; i++)
+            {
+                var gameObject = _stack.Pop();
+                Object.Destroy(gameObject);
+            }
+            Object.Destroy(_rootPool.gameObject);
         }
     }
 }

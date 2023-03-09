@@ -23,7 +23,14 @@ namespace Code.Unit.CraftUnit
         private readonly CraftUnitView _craftUnitView;
         private readonly IPoolServices _poolServices;
 
-        public TriggerUnitController(IPoolServices poolServices, OnTriggerHandlingUnit triggerHandling, MoveUnitController move, MoveUnitView moveUnitView, CraftDevelopment craftDevelopment, GameObject unit, CraftUnitView craftUnitView)
+        public TriggerUnitController(
+            IPoolServices poolServices,
+            OnTriggerHandlingUnit triggerHandling,
+            MoveUnitController move,
+            MoveUnitView moveUnitView,
+            CraftDevelopment craftDevelopment,
+            GameObject unit,
+            CraftUnitView craftUnitView)
         {
             _moveUnitController = move;
             _moveUnitView = moveUnitView;
@@ -49,18 +56,12 @@ namespace Code.Unit.CraftUnit
         {
             barracksView.UnitToDefender++;
             _poolServices.Destroy(_unitGameObject);
-            // DeleteUnit();
-        }
-
-        private void DeleteUnit()
-        {
+            _moveUnitController.OnDestroy();
             OnDestroy();
-            Object.Destroy(_unitGameObject);
         }
 
         private void ExitBarracks(BarracksBuildingView barracksView)
         {
-            
         }
 
         private void EnterResources(CraftResourcesBuilding resources)

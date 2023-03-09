@@ -159,5 +159,11 @@ namespace Code.Unit
         {
             Debug.Log("MoveToCastle");
         }
+
+        public void OnDestroy()
+        {
+            _clickHandling.MoveHappend -= ChooseBuildingToMove;
+            _gateController.GateOpen -= GateOpen;
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
 using Code.GameBalance;
+using Code.GameServices.Pool;
 using UnityEngine;
 
 namespace Code.Unit.CraftUnit
@@ -20,13 +21,15 @@ namespace Code.Unit.CraftUnit
         private readonly MoveUnitView _moveUnitView;
         private readonly GameObject _unitGameObject;
         private readonly CraftUnitView _craftUnitView;
+        private readonly IPoolServices _poolServices;
 
-        public TriggerUnitController(OnTriggerHandlingUnit triggerHandling, MoveUnitController move, MoveUnitView moveUnitView, CraftDevelopment craftDevelopment, GameObject unit, CraftUnitView craftUnitView)
+        public TriggerUnitController(IPoolServices poolServices, OnTriggerHandlingUnit triggerHandling, MoveUnitController move, MoveUnitView moveUnitView, CraftDevelopment craftDevelopment, GameObject unit, CraftUnitView craftUnitView)
         {
             _moveUnitController = move;
             _moveUnitView = moveUnitView;
             _craftDevelopment = craftDevelopment;
             _unitGameObject = unit;
+            _poolServices = poolServices;
             _craftUnitView = craftUnitView;
             _craftUnitView.CraftFinish += CraftFinish;
             
@@ -45,8 +48,8 @@ namespace Code.Unit.CraftUnit
         private void EnterBarracks(BarracksBuildingView barracksView)
         {
             barracksView.UnitToDefender++;
-            DeleteUnit();
-
+            _poolServices.Destroy(_unitGameObject);
+            // DeleteUnit();
         }
 
         private void DeleteUnit()

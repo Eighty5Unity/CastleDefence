@@ -7,6 +7,7 @@ using Code.Buildings.WallAndTowerBuildings;
 using Code.GameBalance;
 using Code.GameServices.AssetService;
 using Code.GameServices.InputService;
+using Code.GameServices.Pool;
 using Code.GameServices.SaveLoadProgress;
 using Code.StaticData;
 using Code.UI;
@@ -83,10 +84,13 @@ namespace Code.GameServices
         
         private GateBuildingView _gateView;
         private GateBuildingController _gateBuildingController;
+        
+        private readonly IPoolServices _poolServices;
 
         public GameFactory(IAssetLoader assetLoader)
         {
             _assetLoader = assetLoader;
+            _poolServices = new PoolServices(this);
 
             _resourcesCount = new ResourcesCount();//TODO register save/load
             _craftDevelopment = new CraftDevelopment();//TODO register save/load
@@ -131,9 +135,15 @@ namespace Code.GameServices
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
         }
 
-        public async Task CreateUnit(Vector3 at)
+        public async Task<GameObject> CreateUnitPrefab()
         {
             GameObject prefab = await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
+            return prefab;
+        }
+
+        public async Task<GameObject> CreateUnit(Vector3 at)
+        {
+            GameObject prefab = await CreateUnitPrefab();
             GameObject unit = Object.Instantiate(prefab, at, Quaternion.identity);
             RegisterProgress(unit);
 
@@ -145,7 +155,9 @@ namespace Code.GameServices
             
             MoveUnitController moveUnitController = new MoveUnitController(clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView, _foodView, _woodView, _stoneView, _ironView, _gateBuildingController);
 
-            TriggerUnitController triggerUnitController = new TriggerUnitController(triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
+            TriggerUnitController triggerUnitController = new TriggerUnitController(_poolServices, triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
+            
+            return unit;
         }
 
         public void CreateDefender()
@@ -209,12 +221,10 @@ namespace Code.GameServices
             
             downPanelView.SetActive(false);
             
-            _castleController = new CastleBuildingController(this, _castleBuildingView, downPanelView, clickHandling, buttonCreateUnitView.Button, _resourcesCount);
+            _castleController = new CastleBuildingController(_poolServices,this, _castleBuildingView, downPanelView, clickHandling, buttonCreateUnitView.Button, _resourcesCount);
         }
 
         private async Task CreateStore()
-        
-        
         {
             GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, BuildingsPositionInWorld.StorePosition, Quaternion.identity);

@@ -14,7 +14,7 @@ namespace Code.GameServices
         Task LoadAddressableAssets();
         void Cleanup();
         void CleanupBuildings();
-        Task CreateUnit(Vector3 at);
+        Task<GameObject> CreateUnit(Vector3 at);
         Task CreateBuildings();
         Task CreateWallAndTower();
         Task CreateResources();
@@ -22,5 +22,6 @@ namespace Code.GameServices
         Task CreateDownUI();
         void CreateUIResourcesView();
         Task<GameObject> CreateUIDownView();
+        Task<GameObject> CreateUnitPrefab();
     }
 }

@@ -2,6 +2,7 @@ using Code.Buildings.ResourcesBuilgings;
 using Code.GameBalance;
 using Code.GameServices;
 using Code.GameServices.InputService;
+using Code.GameServices.Pool;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,10 @@ namespace Code.Buildings.CastleBuildings
         private readonly ClickHandling _clickHandling;
         private readonly Button _createUnitButton;
         private readonly ResourcesCount _resourcesCount;
+        private readonly IPoolServices _poolServices;
 
         public CastleBuildingController(
+            IPoolServices poolServices,
             IGameFactory factory, 
             CastleBuildingView castleView, 
             GameObject uiView, 
@@ -24,6 +27,7 @@ namespace Code.Buildings.CastleBuildings
             Button createUnit, 
             ResourcesCount resourcesCount)
         {
+            _poolServices = poolServices;
             _gameFactory = factory;
             _castleView = castleView;
             _uiView = uiView;
@@ -41,8 +45,8 @@ namespace Code.Buildings.CastleBuildings
         {
             if (_resourcesCount.CheckEnoughResources(CostEverything.Unit))
             {
-                _gameFactory.CreateUnit(_castleView.SpawnUnitPoint.position);
-                _resourcesCount.RemoveResourcesCount(CostEverything.Unit);
+               _poolServices.Instantiate<GameObject>(_gameFactory.CreateUnitPrefab().Result, _castleView.SpawnUnitPoint.position);
+               _resourcesCount.RemoveResourcesCount(CostEverything.Unit);
             }
             else
             {

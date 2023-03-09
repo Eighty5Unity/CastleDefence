@@ -45,7 +45,7 @@ namespace Code.Buildings.CastleBuildings
         {
             if (_resourcesCount.CheckEnoughResources(CostEverything.Unit))
             {
-               _poolServices.Instantiate<GameObject>(_gameFactory.CreateUnitPrefab().Result, _castleView.SpawnUnitPoint.position);
+              _gameFactory.CreateUnit(_castleView.SpawnUnitPoint.position);
                _resourcesCount.RemoveResourcesCount(CostEverything.Unit);
             }
             else

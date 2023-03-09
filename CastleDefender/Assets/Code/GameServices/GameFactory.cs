@@ -87,10 +87,10 @@ namespace Code.GameServices
         
         private readonly IPoolServices _poolServices;
 
-        public GameFactory(IAssetLoader assetLoader)
+        public GameFactory(IAssetLoader assetLoader, IPoolServices poolServices)
         {
             _assetLoader = assetLoader;
-            _poolServices = new PoolServices(this);
+            _poolServices = poolServices;
 
             _resourcesCount = new ResourcesCount();//TODO register save/load
             _craftDevelopment = new CraftDevelopment();//TODO register save/load
@@ -144,7 +144,12 @@ namespace Code.GameServices
         public async Task<GameObject> CreateUnit(Vector3 at)
         {
             GameObject prefab = await CreateUnitPrefab();
-            GameObject unit = Object.Instantiate(prefab, at, Quaternion.identity);
+            GameObject unit = _poolServices.Instantiate(prefab, at);
+            if (unit == null)
+            {
+                unit = Object.Instantiate(prefab, at, Quaternion.identity);
+                unit.name = prefab.name;
+            }
             RegisterProgress(unit);
 
             ClickHandling clickHandling = unit.GetComponentInChildren<ClickHandling>();

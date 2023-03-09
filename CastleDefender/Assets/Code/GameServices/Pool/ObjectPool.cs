@@ -11,12 +11,10 @@ namespace Code.GameServices.Pool
         private readonly Stack<GameObject> _stack = new Stack<GameObject>();
         private readonly GameObject _prefab;
         private readonly Transform _rootPool;
-        private readonly GameFactory _gameFactory;
 
-        public ObjectPool(GameObject prefab, GameFactory factory)
+        public ObjectPool(GameObject prefab)
         {
             _prefab = prefab;
-            _gameFactory = factory;
             _rootPool = new GameObject($"{_prefab.name}").transform;
         }
 
@@ -25,18 +23,16 @@ namespace Code.GameServices.Pool
             GameObject result;
             if (_stack.Count == 0)
             {
-                result = await _gameFactory.CreateUnit(at);
-                result.name = _prefab.name;
+                return null;
             }
             else
             {
                 result = _stack.Pop();
+                result.transform.SetParent(null);
+                result.GetComponentInChildren<MoveUnitView>().transform.position = at;
+                result.SetActive(true);
+                return result;
             }
-
-            result.transform.SetParent(null);
-            result.GetComponentInChildren<MoveUnitView>().transform.position = at;
-            result.SetActive(true);
-            return result;
         }
 
         public void Push(GameObject prefab)

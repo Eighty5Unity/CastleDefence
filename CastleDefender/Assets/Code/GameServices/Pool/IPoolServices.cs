@@ -4,7 +4,7 @@ namespace Code.GameServices.Pool
 {
     public interface IPoolServices : IService
     {
-        T Instantiate<T>(GameObject prefab, Vector3 at) where T : class;
+        GameObject Instantiate(GameObject prefab, Vector3 at);
         void Destroy(GameObject prefab);
     }
 }

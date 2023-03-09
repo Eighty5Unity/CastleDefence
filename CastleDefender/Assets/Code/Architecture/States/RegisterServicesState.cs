@@ -1,5 +1,6 @@
 using Code.GameServices;
 using Code.GameServices.AssetService;
+using Code.GameServices.Pool;
 using Code.GameServices.SaveLoadProgress;
 
 namespace Code.Architecture.States
@@ -35,6 +36,7 @@ namespace Code.Architecture.States
             RegisterAssetLoader();
             RegisterGameProgress();
             RegisterStateMachine();
+            RegisterPoolService();
             RegisterGameFactory();
             RegisterSaveLoad();
         }
@@ -56,9 +58,14 @@ namespace Code.Architecture.States
             _services.RegisterService<IStatesMachine>(_statesMachine);
         }
 
+        private void RegisterPoolService()
+        {
+            _services.RegisterService<IPoolServices>(new PoolServices());
+        }
+
         private void RegisterGameFactory()
         {
-            IGameFactory gameFactory = new GameFactory(_services.GetService<IAssetLoader>());
+            IGameFactory gameFactory = new GameFactory(_services.GetService<IAssetLoader>(), _services.GetService<IPoolServices>());
             _services.RegisterService<IGameFactory>(gameFactory);
         }
 

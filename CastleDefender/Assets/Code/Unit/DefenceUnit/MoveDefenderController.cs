@@ -31,7 +31,7 @@ namespace Code.Unit.DefenceUnit
             }
             else if (building.BuildingType == BuildingType.Gate)
             {
-                Vector3 moveTo = building.transform.position;
+                Vector3 moveTo = building.transform.parent.GetComponent<GateBuildingView>().DefenderMovePoint.position;
                 _moveUnitView.Move(moveTo);
             }
         }

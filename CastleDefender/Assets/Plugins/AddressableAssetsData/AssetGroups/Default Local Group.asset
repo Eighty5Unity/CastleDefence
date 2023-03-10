@@ -129,6 +129,10 @@ MonoBehaviour:
     m_Address: GateStaticData
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: e533ffaa171174ffcab4a26a98f36ddf
+    m_Address: Defender
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9647c83832352455e933108bc7ed237d, type: 2}
   m_SchemaSet:

@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClickHandlingType: 4
-  BuildingType: 12
+  BuildingType: 22
 --- !u!114 &8645624903048870151
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ using Code.StaticData;
 using Code.UI;
 using Code.Unit;
 using Code.Unit.CraftUnit;
+using Code.Unit.DefenceUnit;
 using UnityEngine;
 
 namespace Code.GameServices
@@ -99,6 +100,7 @@ namespace Code.GameServices
         public async Task LoadAddressableAssets()
         {
             await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
+            await _assetLoader.LoadUnits<GameObject>(AssetAddress.DEFENDER);
             
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.CASTLE);
@@ -135,15 +137,21 @@ namespace Code.GameServices
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
         }
 
-        public async Task<GameObject> CreateUnitPrefab()
+        private async Task<GameObject> CreateUnitPrefab(string assetAddress)
         {
-            GameObject prefab = await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
+            GameObject prefab = await _assetLoader.LoadUnits<GameObject>(assetAddress);
+            return prefab;
+        }
+        
+        private async Task<GameObject> CreateBuildingPrefab(string assetAddress)
+        {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(assetAddress);
             return prefab;
         }
 
         public async Task<GameObject> CreateUnit(Vector3 at)
         {
-            GameObject prefab = await CreateUnitPrefab();
+            GameObject prefab = await CreateUnitPrefab(AssetAddress.UNIT);
             GameObject unit = _poolServices.Instantiate(prefab, at);
             if (unit == null)
             {
@@ -165,9 +173,24 @@ namespace Code.GameServices
             return unit;
         }
 
-        public void CreateDefender()
+        public async Task<GameObject> CreateDefender(Vector3 at)
         {
-            Debug.Log("Create Defender");
+            GameObject prefab = await CreateUnitPrefab(AssetAddress.DEFENDER);
+            GameObject defender = _poolServices.Instantiate(prefab, at);
+            if (defender == null)
+            {
+                defender = Object.Instantiate(prefab, at, Quaternion.identity);
+                defender.name = prefab.name;
+            }
+            RegisterProgress(defender);
+
+            ClickHandling clickHandling = defender.GetComponentInChildren<ClickHandling>();
+            OnTriggerHandlingDefender triggerHandling = defender.GetComponentInChildren<OnTriggerHandlingDefender>();
+            MoveUnitView moveDefenderView = defender.GetComponentInChildren<MoveUnitView>();
+
+            MoveDefenderController moveDefenderController = new MoveDefenderController(clickHandling, moveDefenderView);
+
+            return defender;
         }
 
         public void CreateEnemy()

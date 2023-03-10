@@ -1,4 +1,3 @@
-using Code.Buildings.ResourcesBuilgings;
 using Code.GameBalance;
 using Code.GameServices;
 using Code.GameServices.InputService;
@@ -37,11 +36,11 @@ namespace Code.Buildings.CastleBuildings
             _createDefenderButton.onClick.AddListener(CreateDefender);
         }
 
-        private void CreateDefender()
+        private async void CreateDefender()
         {
             if (_resourcesCount.CheckEnoughResources(CostEverything.Defender) && _barracksView.UnitToDefender > 0)
             {
-                _gameFactory.CreateDefender();
+                await _gameFactory.CreateDefender(_barracksView.SpawnDefenderPoint.position);
                 _resourcesCount.RemoveResourcesCount(CostEverything.Defender);
                 _barracksView.UnitToDefender--;
             }

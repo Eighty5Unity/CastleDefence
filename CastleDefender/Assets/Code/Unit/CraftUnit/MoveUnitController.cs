@@ -5,7 +5,7 @@ using Code.Buildings.WallAndTowerBuildings;
 using Code.GameServices.InputService;
 using UnityEngine;
 
-namespace Code.Unit
+namespace Code.Unit.CraftUnit
 {
     public class MoveUnitController
     {

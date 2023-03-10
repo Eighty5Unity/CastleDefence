@@ -33,9 +33,9 @@
     <type fullname="UnityEngine.Animation" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
     <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
-    <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.LayoutElement" preserve="all" />
     <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Text" preserve="all" />
@@ -67,25 +67,26 @@
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Code.Buildings.CastleBuildings.BarracksBuildingView" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.CraftResourcesBuilding" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.WoodBuildingView" preserve="all" />
+    <type fullname="Code.UI.DownUIButtonView" preserve="all" />
+    <type fullname="Code.Buildings.WallAndTowerBuildings.WallBuildingView" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.StoneBuildingView" preserve="all" />
+    <type fullname="Code.Buildings.WallAndTowerBuildings.GateBuildingView" preserve="all" />
     <type fullname="Code.Unit.MoveUnitView" preserve="all" />
     <type fullname="Code.GameServices.InputService.ClickHandling" preserve="all" />
-    <type fullname="Code.Unit.OnTriggerHandlingUnit" preserve="all" />
+    <type fullname="Code.Unit.CraftUnit.OnTriggerHandlingUnit" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.FoodBuildingView" preserve="all" />
+    <type fullname="Code.StaticData.DownInformationStaticData" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.CastleBuildingView" preserve="all" />
     <type fullname="Code.Buildings.CastleBuildings.StoreBuildingView" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.IronBuildingView" preserve="all" />
     <type fullname="Code.UI.ResourcesUICount" preserve="all" />
-    <type fullname="Code.UI.DownInformationUI" preserve="all" />
-    <type fullname="Code.StaticData.DownInformationStaticData" preserve="all" />
-    <type fullname="Code.UI.DownUIButtonView" preserve="all" />
-    <type fullname="Code.Buildings.CastleBuildings.BarracksBuildingView" preserve="all" />
     <type fullname="Code.Unit.CraftUnit.CraftUnitView" preserve="all" />
-    <type fullname="Code.Buildings.WallAndTowerBuildings.WallBuildingView" preserve="all" />
+    <type fullname="Code.UI.DownInformationUI" preserve="all" />
     <type fullname="Code.Buildings.WallAndTowerBuildings.TowerBuildingView" preserve="all" />
-    <type fullname="Code.Buildings.WallAndTowerBuildings.GateBuildingView" preserve="all" />
+    <type fullname="Code.Unit.DefenceUnit.OnTriggerHandlingDefender" preserve="all" />
     <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

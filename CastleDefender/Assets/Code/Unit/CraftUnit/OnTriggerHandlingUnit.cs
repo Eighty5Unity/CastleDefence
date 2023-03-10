@@ -3,7 +3,7 @@ using Code.Buildings.CastleBuildings;
 using Code.Buildings.ResourcesBuilgings;
 using UnityEngine;
 
-namespace Code.Unit
+namespace Code.Unit.CraftUnit
 {
     public class OnTriggerHandlingUnit : MonoBehaviour
     {

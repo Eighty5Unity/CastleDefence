@@ -13,5 +13,6 @@ namespace Code.Buildings
         Wood = 16,
         Stone = 18,
         Iron = 20,
+        Gate = 22,
     }
 }

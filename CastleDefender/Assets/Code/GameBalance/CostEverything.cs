@@ -12,10 +12,10 @@ namespace Code.GameBalance
 
         public static Dictionary<ResourcesType,float> Defender = new Dictionary<ResourcesType, float>()
         {
-            [ResourcesType.Food] = 100f,
-            [ResourcesType.Wood] = 50f,
-            [ResourcesType.Iron] = 100f,
-            [ResourcesType.Money] = 5f,
+            [ResourcesType.Food] = 10f,
+            // [ResourcesType.Wood] = 50f,
+            // [ResourcesType.Iron] = 100f,
+            // [ResourcesType.Money] = 5f,
         };
 
         public static Dictionary<ResourcesType, float> UpgrateFoodCraft = new Dictionary<ResourcesType, float>()

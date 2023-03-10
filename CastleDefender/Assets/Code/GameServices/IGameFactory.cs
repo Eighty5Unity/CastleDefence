@@ -9,12 +9,12 @@ namespace Code.GameServices
     {
         List<ISaveProgress> SaveProgress { get; }
         List<ILoadProgress> LoadProgress { get; }
-        void CreateDefender();
         void CreateEnemy();
         Task LoadAddressableAssets();
         void Cleanup();
         void CleanupBuildings();
         Task<GameObject> CreateUnit(Vector3 at);
+        Task<GameObject> CreateDefender(Vector3 at);
         Task CreateBuildings();
         Task CreateWallAndTower();
         Task CreateResources();
@@ -22,6 +22,5 @@ namespace Code.GameServices
         Task CreateDownUI();
         void CreateUIResourcesView();
         Task<GameObject> CreateUIDownView();
-        Task<GameObject> CreateUnitPrefab();
     }
 }

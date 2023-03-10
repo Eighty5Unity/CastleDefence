@@ -7,7 +7,7 @@ namespace Code.GameBalance
 {
     public class ResourcesCount : ISaveProgress, ILoadProgress
     {
-        public float Food { get; private set; } = 10f;
+        public float Food { get; private set; } = 1000f;
         public float Wood { get; private set; }
         public float Stone { get; private set; }
         public float Iron { get; private set; }

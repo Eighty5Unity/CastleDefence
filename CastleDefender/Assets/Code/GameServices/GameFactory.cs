@@ -189,6 +189,7 @@ namespace Code.GameServices
             MoveUnitView moveDefenderView = defender.GetComponentInChildren<MoveUnitView>();
 
             MoveDefenderController moveDefenderController = new MoveDefenderController(clickHandling, moveDefenderView);
+            TriggerDefenderController triggerDefenderController = new TriggerDefenderController(triggerHandling, moveDefenderView);
 
             return defender;
         }

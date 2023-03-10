@@ -1,4 +1,5 @@
 using Code.Buildings;
+using Code.Buildings.WallAndTowerBuildings;
 using Code.GameServices.InputService;
 using UnityEngine;
 
@@ -20,12 +21,12 @@ namespace Code.Unit.DefenceUnit
         {
             if (building.BuildingType == BuildingType.Tower)
             {
-                Vector3 moveTo = building.transform.position;
+                Vector3 moveTo = building.transform.parent.GetComponent<TowerBuildingView>().DefenderMovePoint.position;;
                 _moveUnitView.Move(moveTo);
             }
             else if (building.BuildingType == BuildingType.Wall)
             {
-                Vector3 moveTo = building.transform.position;
+                Vector3 moveTo = building.transform.parent.GetComponent<WallBuildingView>().DefenderMovePoint.position;
                 _moveUnitView.Move(moveTo);
             }
             else if (building.BuildingType == BuildingType.Gate)

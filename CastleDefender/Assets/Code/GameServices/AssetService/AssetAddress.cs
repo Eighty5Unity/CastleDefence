@@ -4,6 +4,7 @@ namespace Code.GameServices.AssetService
     {
         public const string UNIT = "Unit";
         public const string DEFENDER = "Defender";
+        public const string ENEMY = "Enemy";
 
         public const string CASTLE = "Castle";
         public const string STATIC_DATA_CASTLE = "CastleStaticData";

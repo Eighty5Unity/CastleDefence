@@ -14,6 +14,7 @@ using Code.UI;
 using Code.Unit;
 using Code.Unit.CraftUnit;
 using Code.Unit.DefenceUnit;
+using Code.Unit.EnemyUnit;
 using UnityEngine;
 
 namespace Code.GameServices
@@ -101,6 +102,7 @@ namespace Code.GameServices
         {
             await _assetLoader.LoadUnits<GameObject>(AssetAddress.UNIT);
             await _assetLoader.LoadUnits<GameObject>(AssetAddress.DEFENDER);
+            await _assetLoader.LoadUnits<GameObject>(AssetAddress.ENEMY);
             
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.CASTLE);
@@ -167,8 +169,10 @@ namespace Code.GameServices
             CraftUnitView craftUnitView = unit.GetComponentInChildren<CraftUnitView>();
             
             MoveUnitController moveUnitController = new MoveUnitController(clickHandling, moveUnitView, _castleBuildingView, _storeBuildingView, _barracksBuildingView, _foodView, _woodView, _stoneView, _ironView, _gateBuildingController);
-
             TriggerUnitController triggerUnitController = new TriggerUnitController(_poolServices, triggerHandling, moveUnitController, moveUnitView, _craftDevelopment, unit, craftUnitView);
+
+            //
+            CreateEnemy(new Vector3(10f, 1.5f, 100f));
             
             return unit;
         }
@@ -194,9 +198,25 @@ namespace Code.GameServices
             return defender;
         }
 
-        public void CreateEnemy()
+        public async Task<GameObject> CreateEnemy(Vector3 at)
         {
+            GameObject prefab = await CreateUnitPrefab(AssetAddress.ENEMY);
+            GameObject enemy = _poolServices.Instantiate(prefab, at);
+            if (enemy == null)
+            {
+                enemy = Object.Instantiate(prefab, at, Quaternion.identity);
+                enemy.name = prefab.name;
+            }
+
+            OnTriggerHandlingDefender triggerHandling = enemy.GetComponentInChildren<OnTriggerHandlingDefender>();
+
+            EnemyAttackView enemyAttackView = enemy.GetComponentInChildren<EnemyAttackView>();
+            MoveUnitView moveUnitView = enemy.GetComponentInChildren<MoveUnitView>();
+
+            MoveEnemyController moveEnemyController = new MoveEnemyController(moveUnitView, enemyAttackView);
+            TriggerEnemyController enemyAttackController = new TriggerEnemyController(triggerHandling, moveUnitView);
             
+            return enemy;
         }
 
         public async Task CreateBuildings()
@@ -224,7 +244,7 @@ namespace Code.GameServices
 
         private async Task CreateCastle()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.CASTLE);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.CASTLE);
             GameObject castle = Object.Instantiate(prefab, BuildingsPositionInWorld.CastlePosition, Quaternion.identity);
             _castleBuildingView = castle.GetComponent<CastleBuildingView>();
             ClickHandling clickHandling = castle.GetComponentInChildren<ClickHandling>();
@@ -255,7 +275,7 @@ namespace Code.GameServices
 
         private async Task CreateStore()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STORE);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.STORE);
             GameObject store = Object.Instantiate(prefab, BuildingsPositionInWorld.StorePosition, Quaternion.identity);
             _storeBuildingView = store.GetComponent<StoreBuildingView>();
             ClickHandling clickHandling = store.GetComponentInChildren<ClickHandling>();
@@ -304,7 +324,7 @@ namespace Code.GameServices
 
         private async Task CreateBarracks()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.BARRACKS);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.BARRACKS);
             GameObject barracks = Object.Instantiate(prefab, BuildingsPositionInWorld.BarracksPosition, Quaternion.identity);
             _barracksBuildingView = barracks.GetComponent<BarracksBuildingView>();
             ClickHandling clickHandling = barracks.GetComponentInChildren<ClickHandling>();
@@ -335,7 +355,7 @@ namespace Code.GameServices
 
         private async Task CreateSmithy()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.SMITHY);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.SMITHY);
             GameObject smithy = Object.Instantiate(prefab, BuildingsPositionInWorld.SmithyPosition, Quaternion.identity);
             ClickHandling clickHandling = smithy.GetComponentInChildren<ClickHandling>();
 
@@ -385,7 +405,7 @@ namespace Code.GameServices
         {
             //TODO Refactoring!
             
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WALL);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.WALL);
 
             GameObject wall01 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition01, Quaternion.Euler(BuildingsPositionInWorld.WallRotation01));
             GameObject wall02 = Object.Instantiate(prefab, BuildingsPositionInWorld.WallPosition02, Quaternion.Euler(BuildingsPositionInWorld.WallRotation02));
@@ -523,7 +543,7 @@ namespace Code.GameServices
         {
             //TODO Refactoring!
             
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.TOWER);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.TOWER);
 
             GameObject tower01 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition01, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation01));
             GameObject tower02 = Object.Instantiate(prefab, BuildingsPositionInWorld.TowerPosition02, Quaternion.Euler(BuildingsPositionInWorld.TowerRotation02));
@@ -582,7 +602,7 @@ namespace Code.GameServices
 
         private async Task CreateGate()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.GATE);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.GATE);
             GameObject gate = Object.Instantiate(prefab, BuildingsPositionInWorld.GatePosition, Quaternion.Euler(BuildingsPositionInWorld.GateRotation));
             ClickHandling clickHandling = gate.GetComponentInChildren<ClickHandling>();
             _gateView = gate.GetComponent<GateBuildingView>();
@@ -613,7 +633,7 @@ namespace Code.GameServices
 
         private async Task CreateFood()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.FOOD);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.FOOD);
             GameObject food = Object.Instantiate(prefab, BuildingsPositionInWorld.FoodPosition, Quaternion.identity);
             ClickHandling clickHandling = food.GetComponentInChildren<ClickHandling>();
             _foodView = food.GetComponent<FoodBuildingView>();
@@ -633,7 +653,7 @@ namespace Code.GameServices
 
         private async Task CreateWood()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.WOOD);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.WOOD);
             GameObject wood = Object.Instantiate(prefab, BuildingsPositionInWorld.WoodPosition, Quaternion.identity);
             ClickHandling clickHandling = wood.GetComponentInChildren<ClickHandling>();
             _woodView = wood.GetComponent<WoodBuildingView>();
@@ -653,7 +673,7 @@ namespace Code.GameServices
 
         private async Task CreateStone()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.STONE);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.STONE);
             GameObject stone = Object.Instantiate(prefab, BuildingsPositionInWorld.StonePosition, Quaternion.identity);
             ClickHandling clickHandling = stone.GetComponentInChildren<ClickHandling>();
             _stoneView = stone.GetComponent<StoneBuildingView>();
@@ -673,7 +693,7 @@ namespace Code.GameServices
 
         private async Task CreateIron()
         {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.IRON);
+            GameObject prefab = await CreateBuildingPrefab(AssetAddress.IRON);
             GameObject iron = Object.Instantiate(prefab, BuildingsPositionInWorld.IronPosition, Quaternion.identity);
             ClickHandling clickHandling = iron.GetComponentInChildren<ClickHandling>();
             _ironView = iron.GetComponent<IronBuildingView>();

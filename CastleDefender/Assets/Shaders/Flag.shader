@@ -2,7 +2,8 @@ Shader "Unlit/Flag"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        [NoScaleOffset] _MainTex ("Texture", 2D) = "white" {}
+        _Amplitude ("Amplitude", Range(1, 4)) = 1
     }
     SubShader
     {
@@ -30,15 +31,13 @@ Shader "Unlit/Flag"
             };
 
             sampler2D _MainTex;
+            float _Amplitude;
             float4 _MainTex_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                if(v.vertex.x < 5)
-                {
-                    v.vertex.y += sin(v.vertex.x + _Time.z);
-                }
+                v.vertex.y += sin(v.vertex.x + _Time.z) * v.uv.x * _Amplitude;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;

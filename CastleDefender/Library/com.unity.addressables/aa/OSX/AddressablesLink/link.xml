@@ -90,6 +90,7 @@
     <type fullname="Code.UI.DownInformationUI" preserve="all" />
     <type fullname="Code.Buildings.WallAndTowerBuildings.TowerBuildingView" preserve="all" />
     <type fullname="Code.Buildings.WallAndTowerBuildings.AttackedBuilding" preserve="all" />
+    <type fullname="Code.ShadersTools.FlagAmplitude" preserve="all" />
     <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

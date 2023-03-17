@@ -14,12 +14,12 @@ namespace Code.Unit
 
         public void Resume()
         {
-            NavMesh.Resume();
+            NavMesh.isStopped = false;
         }
 
         public void Stop()
         {
-            NavMesh.Stop();
+            NavMesh.isStopped = true;
         }
     }
 }

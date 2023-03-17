@@ -40,7 +40,7 @@ Shader "Custom/Outline Fill" {
       #pragma vertex vert
       #pragma fragment frag
 
-      struct appdata {
+      struct VertexData {
         float4 vertex : POSITION;
         float3 normal : NORMAL;
         float3 smoothNormal : TEXCOORD3;
@@ -56,7 +56,7 @@ Shader "Custom/Outline Fill" {
       uniform fixed4 _OutlineColor;
       uniform float _OutlineWidth;
 
-      v2f vert(appdata input) {
+      v2f vert(VertexData input) {
         v2f output;
 
         UNITY_SETUP_INSTANCE_ID(input);

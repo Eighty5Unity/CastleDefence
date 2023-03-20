@@ -1,30 +1,33 @@
 using System;
 using Code.Buildings;
-using Code.ShadersTools;
 using UnityEngine;
 
 namespace Code.GameServices.InputService
 {
     public class ClickHandling : MonoBehaviour
     {
-        [SerializeField] private DrawOutline _drawOutline;
-        
         public ClickHandlingType ClickHandlingType;
         public BuildingType BuildingType;
         public event Action OnClickHappend;
         public event Action OffClickHappend;
         public event Action<ClickHandling> MoveHappend;
+        private Outline _outline;
 
+        private void Start()
+        {
+            _outline = GetComponent<Outline>();
+            _outline.OutlineWidth = 0f;
+        }
 
         public void OnClick()
         {
-            _drawOutline.MakeVisible();
+            _outline.OutlineWidth = 5f;
             OnClickHappend?.Invoke();
         }
 
         public void OffClick()
         {
-            _drawOutline.MakeUnvisible();
+            _outline.OutlineWidth = 0f;
             OffClickHappend?.Invoke();
         }
 

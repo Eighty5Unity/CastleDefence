@@ -76,11 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35dfc8656fbe4f1493a3ccdec0566d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Food: 0
-  Wood: 0
-  Stone: 0
-  Iron: 0
-  Money: 0
   StorePointPosition: {fileID: 2380751285655402547}
 --- !u!65 &2797477298816941838
 BoxCollider:
@@ -108,7 +103,7 @@ GameObject:
   - component: {fileID: 6022088640294623986}
   - component: {fileID: 3536721002793288153}
   - component: {fileID: 598045217310532308}
-  - component: {fileID: 2734080583236246668}
+  - component: {fileID: 2530055734175647025}
   m_Layer: 0
   m_Name: Building
   m_TagString: Store
@@ -204,9 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 2530055734175647025}
   ClickHandlingType: 4
   BuildingType: 8
---- !u!114 &2734080583236246668
+--- !u!114 &2530055734175647025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,12 +211,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7761921728368099084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  _material: {fileID: 2100000, guid: 4a0119f06950b4b1b9720a0930dc2f6a, type: 2}

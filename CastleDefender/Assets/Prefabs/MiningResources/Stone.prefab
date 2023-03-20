@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1691597263656122947}
   - component: {fileID: 74687892158953681}
   - component: {fileID: 8898259687633117592}
-  - component: {fileID: 1790267437959168634}
+  - component: {fileID: 3126579040453264409}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Stone
@@ -111,9 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 3126579040453264409}
   ClickHandlingType: 4
   BuildingType: 18
---- !u!114 &1790267437959168634
+--- !u!114 &3126579040453264409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,15 +123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 14400809077023566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  _material: {fileID: 2100000, guid: c6808bbe6e00744eb9c92c4fb3655a93, type: 2}
 --- !u!1 &2244695548033277746
 GameObject:
   m_ObjectHideFlags: 0

@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7907340053859535699}
   - component: {fileID: 992067330828186234}
   - component: {fileID: 3588204294877401180}
-  - component: {fileID: 81059069136757408}
+  - component: {fileID: 1143063515167246612}
   m_Layer: 0
   m_Name: Ironstone
   m_TagString: Iron
@@ -245,9 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 1143063515167246612}
   ClickHandlingType: 4
   BuildingType: 20
---- !u!114 &81059069136757408
+--- !u!114 &1143063515167246612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,12 +257,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6053745445151215415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  _material: {fileID: 2100000, guid: 159247d92c688404ba543234cc5fbaad, type: 2}

@@ -50,9 +50,6 @@
     <type fullname="UnityEngine.UI.Navigation" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
   </assembly>
-  <assembly fullname="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Outline" preserve="all" />
-  </assembly>
   <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="TMPro.TMP_FontAsset" preserve="all" />
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
@@ -91,6 +88,7 @@
     <type fullname="Code.Buildings.WallAndTowerBuildings.TowerBuildingView" preserve="all" />
     <type fullname="Code.Buildings.WallAndTowerBuildings.AttackedBuilding" preserve="all" />
     <type fullname="Code.ShadersTools.FlagAmplitude" preserve="all" />
+    <type fullname="Code.ShadersTools.DrawOutline" preserve="all" />
     <type fullname="Code.StaticData.UIButtonInfo" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">

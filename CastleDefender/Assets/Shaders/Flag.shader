@@ -3,7 +3,6 @@ Shader "Unlit/Flag"
     Properties
     {
         [NoScaleOffset] _MainTex ("Texture", 2D) = "white" {}
-//        _Amplitude ("Amplitude", Range(1, 4)) = 1
     }
     SubShader
     {

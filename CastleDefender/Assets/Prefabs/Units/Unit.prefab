@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 8228704457704505157}
   - component: {fileID: 4977549002906072098}
   - component: {fileID: 6809733591708346554}
-  - component: {fileID: 1514657414086913261}
   - component: {fileID: 7361024654760321904}
   - component: {fileID: 7348434576026226584}
   - component: {fileID: 2407218566057066299}
+  - component: {fileID: 5088548493017630095}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -153,26 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 5088548493017630095}
   ClickHandlingType: 2
   BuildingType: 0
---- !u!114 &1514657414086913261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838802977472298686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &7361024654760321904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NavMesh: {fileID: 2085481683235244762}
-  CraftResourcesType: 0
 --- !u!114 &7348434576026226584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +193,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a37fb6947d84734b1540f49b430116d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5088548493017630095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838802977472298686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 7c105c55a5ef1475ea816f51bdfab780, type: 2}
 --- !u!1 &7441161361420118376
 GameObject:
   m_ObjectHideFlags: 0

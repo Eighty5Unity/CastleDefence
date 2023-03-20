@@ -103,8 +103,8 @@ GameObject:
   - component: {fileID: 1143442031260540663}
   - component: {fileID: 2075206368782610491}
   - component: {fileID: 6273799111684987263}
-  - component: {fileID: 7229261885764906911}
   - component: {fileID: 4915858808471890257}
+  - component: {fileID: 1314834540205809511}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -200,26 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 1314834540205809511}
   ClickHandlingType: 4
   BuildingType: 10
---- !u!114 &7229261885764906911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5583181123321316691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &4915858808471890257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +215,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0df16befdf41b387f488b60683fcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1314834540205809511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583181123321316691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: fa3e218dbad1a41c9b63c00aff231c2b, type: 2}
 --- !u!1 &8069191112424960664
 GameObject:
   m_ObjectHideFlags: 0

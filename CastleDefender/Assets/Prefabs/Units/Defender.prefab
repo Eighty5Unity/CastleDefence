@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8228704457704505157}
   - component: {fileID: 4977549002906072098}
   - component: {fileID: 6809733591708346554}
-  - component: {fileID: 1514657414086913261}
   - component: {fileID: 7361024654760321904}
   - component: {fileID: 6818625147262314196}
+  - component: {fileID: 5916813636960371223}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -152,26 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3d06f797c46b190f448e089c7cb8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drawOutline: {fileID: 5916813636960371223}
   ClickHandlingType: 2
   BuildingType: 0
---- !u!114 &1514657414086913261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838802977472298686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!114 &7361024654760321904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +180,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db458c4eebb44f2b6bc4539ba08487d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5916813636960371223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838802977472298686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dab7b3cde34476ba9bd3d3023dea545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 36e54cf0d52c64183be548387a937deb, type: 2}
 --- !u!1 &7441161361420118376
 GameObject:
   m_ObjectHideFlags: 0

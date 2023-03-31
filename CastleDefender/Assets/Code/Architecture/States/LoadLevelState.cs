@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Code.GameServices;
 using Code.GameServices.SaveLoadProgress;
+using Code.Unit.EnemyUnit;
 using UnityEngine;
 
 namespace Code.Architecture.States
@@ -33,6 +34,11 @@ namespace Code.Architecture.States
             await InitGameWorld();
             InformProgressLoaders();
             InitUIResourcesView();
+            
+            //
+            SpawnEnemyPositions spawnEnemy = new SpawnEnemyPositions(_gameFactory);
+            spawnEnemy.SpawnEnemy(100);
+            //
 
             _statesMachine.EnterState<GameLoopState>();
         }

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8228704457704505157}
   - component: {fileID: 4977549002906072098}
   - component: {fileID: 7361024654760321904}
-  - component: {fileID: 400826748104741129}
   - component: {fileID: 7247196899053385205}
   m_Layer: 0
   m_Name: Body
@@ -152,19 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NavMesh: {fileID: 2085481683235244762}
---- !u!114 &400826748104741129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838802977472298686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b37452ff454b55aa238c2a0c3d101d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackBuildingPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7247196899053385205
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -70,7 +70,6 @@
   <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="Code.Buildings.CastleBuildings.BarracksBuildingView" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.CraftResourcesBuilding" preserve="all" />
-    <type fullname="Code.Unit.EnemyUnit.EnemyAttackView" preserve="all" />
     <type fullname="Code.Unit.DefenceUnit.OnTriggerHandlingDefender" preserve="all" />
     <type fullname="Code.Buildings.ResourcesBuilgings.WoodBuildingView" preserve="all" />
     <type fullname="Code.UI.DownUIButtonView" preserve="all" />

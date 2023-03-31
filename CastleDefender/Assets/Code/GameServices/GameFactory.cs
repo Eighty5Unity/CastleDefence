@@ -25,19 +25,15 @@ namespace Code.GameServices
         public List<ILoadProgress> LoadProgress { get; } = new List<ILoadProgress>();
         
         private readonly IAssetLoader _assetLoader;
-        
         private Transform _canvasUp;
         private Transform _canvasDown;
 
         private CastleBuildingView _castleBuildingView;
         private CastleBuildingController _castleController;
-
         private StoreBuildingView _storeBuildingView;
         private StoreBuildingController _storeController;
-        
         private BarracksBuildingView _barracksBuildingView;
         private BarracksBuildingController _barracksController;
-
         private SmithyController _smithyController;
         
         private readonly ResourcesCount _resourcesCount;
@@ -54,10 +50,8 @@ namespace Code.GameServices
         
         private List<TowerBuildingView> _towersView = new List<TowerBuildingView>(4);
         private List<TowerBuildingController> _towersBuildingController = new List<TowerBuildingController>(4);
-
         private List<WallBuildingView> _wallsView = new List<WallBuildingView>(11);
         private List<WallBuildingController> _wallsBuildingController = new List<WallBuildingController>(11);
-
         private GateBuildingView _gateView;
         private GateBuildingController _gateBuildingController;
         
@@ -111,18 +105,6 @@ namespace Code.GameServices
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_WOOD);
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STONE);
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_IRON);
-        }
-
-        private async Task<GameObject> CreateUnitPrefab(string assetAddress)
-        {
-            GameObject prefab = await _assetLoader.LoadUnits<GameObject>(assetAddress);
-            return prefab;
-        }
-        
-        private async Task<GameObject> CreateBuildingPrefab(string assetAddress)
-        {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(assetAddress);
-            return prefab;
         }
 
         public async Task<GameObject> CreateUnit(Vector3 at)
@@ -210,6 +192,54 @@ namespace Code.GameServices
             await CreateWood();
             await CreateStone();
             await CreateIron();
+        }
+
+        public async Task CreateUpUI()
+        {
+            GameObject prefabUp = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CANVAS);
+            GameObject canvasUp = Object.Instantiate(prefabUp);
+            _canvasUp = canvasUp.transform;
+        }
+
+        public async Task CreateDownUI()
+        {
+            GameObject prefabDown = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CANVAS);
+            GameObject canvasDown = Object.Instantiate(prefabDown);
+            _canvasDown = canvasDown.transform;
+        }
+
+        public async void CreateUIResourcesView()
+        {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CONTAINER);
+            GameObject uiResourcesView = Object.Instantiate(prefab, _canvasUp);
+            RegisterProgress(uiResourcesView);
+
+            ResourcesUICount resourcesUICount = uiResourcesView.GetComponent<ResourcesUICount>();
+
+            resourcesUICount.Constructor(_resourcesCount);
+        }
+
+        public void CleanupBuildings()
+        {
+            _assetLoader.CleanupBuildings();
+        }
+
+        public void Cleanup()
+        {
+            _assetLoader.CleanupBuildings();
+            _assetLoader.CleanupUnits();
+        }
+
+        private async Task<GameObject> CreateBuildingPrefab(string assetAddress)
+        {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(assetAddress);
+            return prefab;
+        }
+
+        private async Task<GameObject> CreateUnitPrefab(string assetAddress)
+        {
+            GameObject prefab = await _assetLoader.LoadUnits<GameObject>(assetAddress);
+            return prefab;
         }
 
         private async Task CreateCastle()
@@ -542,47 +572,11 @@ namespace Code.GameServices
             return buttonUpgradeFoodView;
         }
 
-        public async Task CreateUpUI()
-        {
-            GameObject prefabUp = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CANVAS);
-            GameObject canvasUp = Object.Instantiate(prefabUp);
-            _canvasUp = canvasUp.transform;
-        }
-
-        public async Task CreateDownUI()
-        {
-            GameObject prefabDown = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CANVAS);
-            GameObject canvasDown = Object.Instantiate(prefabDown);
-            _canvasDown = canvasDown.transform;
-        }
-
-        public async void CreateUIResourcesView()
-        {
-            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CONTAINER);
-            GameObject uiResourcesView = Object.Instantiate(prefab, _canvasUp);
-            RegisterProgress(uiResourcesView);
-
-            ResourcesUICount resourcesUICount = uiResourcesView.GetComponent<ResourcesUICount>();
-
-            resourcesUICount.Constructor(_resourcesCount);
-        }
-
-        public async Task<GameObject> CreateUIDownView()
+        private async Task<GameObject> CreateUIDownView()
         {
             GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             GameObject uiDownView = Object.Instantiate(prefab);
             return uiDownView;
-        }
-
-        public void CleanupBuildings()
-        {
-            _assetLoader.CleanupBuildings();
-        }
-
-        public void Cleanup()
-        {
-            _assetLoader.CleanupBuildings();
-            _assetLoader.CleanupUnits();
         }
 
         private void RegisterProgress(GameObject gameObject)

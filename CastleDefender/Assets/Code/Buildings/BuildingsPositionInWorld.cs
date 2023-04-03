@@ -31,7 +31,6 @@ namespace Code.Buildings
         private static Vector3 _wallRotation10 = new Vector3(0, -90, 0);
         private static Vector3 _wallPosition11 = new Vector3(-4.5f, 0, 1.5f);
         private static Vector3 _wallRotation11 = new Vector3(0, -90, 0);
-
         public static Vector3[] WallsPosition =
         {
             _wallPosition01, _wallPosition02, _wallPosition03, _wallPosition04, _wallPosition05,
@@ -51,7 +50,6 @@ namespace Code.Buildings
         private static Vector3 _towerRotation03 = new Vector3(0, 180, 0);
         private static Vector3 _towerPosition04 = new Vector3(-4.5f, 0, -15f);
         private static Vector3 _towerRotation04 = new Vector3(0, 270, 0);
-
         public static Vector3[] TowersPosition = {_towerPosition01, _towerPosition02, _towerPosition03, _towerPosition04};
         public static Vector3[] TowersRotation = {_towerRotation01, _towerRotation02, _towerRotation03, _towerRotation04};
         

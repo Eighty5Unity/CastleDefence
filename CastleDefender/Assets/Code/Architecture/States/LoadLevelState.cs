@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Code.GameServices;
 using Code.GameServices.SaveLoadProgress;
 using Code.Unit.EnemyUnit;
-using UnityEngine;
 
 namespace Code.Architecture.States
 {

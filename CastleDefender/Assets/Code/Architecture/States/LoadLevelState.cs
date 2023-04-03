@@ -33,10 +33,6 @@ namespace Code.Architecture.States
             await InitGameWorld();
             InformProgressLoaders();
             InitUIResourcesView();
-            
-            //
-            WaveAttackController waveAttackController = new WaveAttackController(_gameFactory);
-            //
 
             _statesMachine.EnterState<GameLoopState>();
         }

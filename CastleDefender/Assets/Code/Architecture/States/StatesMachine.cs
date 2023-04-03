@@ -27,7 +27,7 @@ namespace Code.Architecture.States
                     sceneLoader,
                     services.GetService<IGameFactory>(), 
                     services.GetService<IProgressService>()),
-                [typeof(GameLoopState)] = new GameLoopState(),
+                [typeof(GameLoopState)] = new GameLoopState(services.GetService<IGameFactory>()),
             };
         }
 

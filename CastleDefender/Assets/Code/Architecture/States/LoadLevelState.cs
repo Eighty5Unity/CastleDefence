@@ -35,8 +35,7 @@ namespace Code.Architecture.States
             InitUIResourcesView();
             
             //
-            SpawnEnemyPositions spawnEnemy = new SpawnEnemyPositions(_gameFactory);
-            spawnEnemy.SpawnEnemy(100);
+            WaveAttackController waveAttackController = new WaveAttackController(_gameFactory);
             //
 
             _statesMachine.EnterState<GameLoopState>();
@@ -46,6 +45,7 @@ namespace Code.Architecture.States
         {
             await _gameFactory.CreateUpUI();
             await _gameFactory.CreateDownUI();
+            await _gameFactory.CreateUIWaveView();
         }
 
         private async Task InitGameWorld()

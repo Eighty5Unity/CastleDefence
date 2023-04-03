@@ -23,7 +23,9 @@ namespace Code.GameServices
     {
         public List<ISaveProgress> SaveProgress { get; } = new List<ISaveProgress>();
         public List<ILoadProgress> LoadProgress { get; } = new List<ILoadProgress>();
-        
+
+        public WaveUIView WaveUIView { get; set; }
+
         private readonly IAssetLoader _assetLoader;
         private Transform _canvasUp;
         private Transform _canvasDown;
@@ -91,6 +93,7 @@ namespace Code.GameServices
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_UP_CONTAINER);
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_CONTAINER);
             await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_DOWN_BUTTON);
+            await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_WAVE_TIMER);
 
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_STORE);
             await _assetLoader.LoadBuildings<DownInformationStaticData>(AssetAddress.STATIC_DATA_CASTLE);
@@ -217,6 +220,14 @@ namespace Code.GameServices
             ResourcesUICount resourcesUICount = uiResourcesView.GetComponent<ResourcesUICount>();
 
             resourcesUICount.Constructor(_resourcesCount);
+        }
+
+        public async Task CreateUIWaveView()
+        {
+            GameObject prefab = await _assetLoader.LoadBuildings<GameObject>(AssetAddress.UI_WAVE_TIMER);
+            GameObject uiWaveView = Object.Instantiate(prefab);
+            WaveUIView = uiWaveView.GetComponent<WaveUIView>();
+            WaveUIView.StartWave(0, 0);
         }
 
         public void CleanupBuildings()

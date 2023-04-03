@@ -41,5 +41,6 @@ namespace Code.GameServices.AssetService
         public const string UI_UP_CONTAINER = "UpContainer";
         public const string UI_DOWN_CONTAINER = "DownContainer";
         public const string UI_DOWN_BUTTON = "DownUIButton";
+        public const string UI_WAVE_TIMER = "CanvasWave";
     }
 }

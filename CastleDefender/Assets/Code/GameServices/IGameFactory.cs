@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.GameServices.SaveLoadProgress;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.GameServices
@@ -9,6 +10,7 @@ namespace Code.GameServices
     {
         List<ISaveProgress> SaveProgress { get; }
         List<ILoadProgress> LoadProgress { get; }
+        WaveUIView WaveUIView { get; set; }
         Task LoadAddressableAssets();
         void Cleanup();
         void CleanupBuildings();
@@ -21,5 +23,6 @@ namespace Code.GameServices
         Task CreateUpUI();
         Task CreateDownUI();
         void CreateUIResourcesView();
+        Task CreateUIWaveView();
     }
 }
